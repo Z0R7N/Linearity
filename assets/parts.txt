@@ -1,0 +1,5 @@
+Шаговый двигатель   	1180 руб
+https://www.duxe.ru/catalog/shagovye_dvigateli/dvigateli/shagovyy_dvigatel_57hs76_3004b_dva_vala/
+
+энкодер			+
+плата STM STM32H753VI	
