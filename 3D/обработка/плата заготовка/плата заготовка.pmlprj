@@ -1,0 +1,12 @@
+9 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+03 дек 2021 08.01.04
+x1e9fea2061a9a25d000020d600000000.pmlent pmlEntModel 'плата заготовка'
+x1f24ac3061a9a2630000244000000000.pmlent pmlEntLevel 'Config-0-Partition'
+x22d5f66061a9a2b50000625d00000000.pmlent pmlEntTool 'EM2x2'
+x450d509061a9a2d30000ba1c00000000.pmlent pmlEntWorkplane '1'
+x44bbbc2061a9a2db0000ce4f00000000.pmlent pmlEntToolpath 'плата загот 3шт д2'
+x228b3eb061a9a2f30000fda000000000.pmlent pmlEntNCProgram 'плата загот 3шт д2'
+x4586fd3061a9a38900015ee700000000.pmlent pmlEntBoundary '1'
+x4d4f77f061a9a44a0003b5d200000000.pmlent pmlEntToolpath 'плата загот 3шт д2_1'
+x4dac58d061a9a44b0003c1c900000000.pmlent pmlEntBoundary '1_1'
