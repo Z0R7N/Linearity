@@ -1,0 +1,14 @@
+11 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 дек 2021 09.05.45
+x1adb6da061c053d4000020e200000000.pmlent pmlEntLevel 'Config-0-Partition'
+x2288e66061c0540400002ee400000000.pmlent pmlEntTool 'EM3x2'
+x1ac4808061c054850000653200000000.pmlent pmlEntWorkplane '1'
+x223432d061c054990000774000000000.pmlent pmlEntToolpath 'крышка отв д3'
+x228a2e0061c055b60000e88000000000.pmlent pmlEntBoundary '1'
+x430f4c4061c055c40001111800000000.pmlent pmlEntToolpath 'крышка окно д3'
+x4364cda061c0565f00018eac00000000.pmlent pmlEntBoundary '2'
+x4301966061c056ba0001d0ee00000000.pmlent pmlEntToolpath 'крышка профиль д3'
+x22e283f061c055340000ad7300000000.pmlent pmlEntNCProgram 'крышка д3'
+x2234093061c053ce00001e7600000000.pmlent pmlEntModel 'держатель энкодера крышка'
+x1cc61d9061c167c30006d0df00000000.pmlent pmlEntFeature '1'

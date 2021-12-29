@@ -1,14 +1,14 @@
 {
 	"type" : "Project",
-	"time" : "1638507666",
+	"time" : "1640086943",
 	"version" : "0"
 }
 {
-	"Programmer" "S" "Name of programmer that created this project." "22b4e94061a9a27f00002f5d00000000" : "3",
-	"Customer" "S" "Name of customer that this project refers to." "22b4ec6061a9a27f00002f5f00000000" : "",
-	"TextBlocks" "M" "A place holder for text objects." "22b4ee8061a9a27f00002f6100000000" : {
+	"Programmer" "S" "Имя программиста, создавшего этот проект." "22b4e94061a9a27f00002f5d00000000" : "3",
+	"Customer" "S" "Имя заказчика проекта." "22b4ec6061a9a27f00002f5f00000000" : "",
+	"TextBlocks" "M" "Место под текстовый объект." "22b4ee8061a9a27f00002f6100000000" : {
 	},
-	"HoleTagCatalog" "S" "Last used catalog for this project." "22b4f06061a9a27f00002f6300000000" : "",
+	"HoleTagCatalog" "S" "Последний используемый каталог для этого проекта." "22b4f06061a9a27f00002f6300000000" : "",
 	"FusionProductionJob" : {
 		"Name" : "${project_pathname(1)}",
 		"Instructions" : "${Project.Notes}",
@@ -17,23 +17,23 @@
 		"TaskList" : (
 		)
 	},
-	"A360" "M" "A360 settings for this PowerMill project." : {
-		"Hub" "S" "A360 Hub ID" : "",
-		"Folder" "S" "A360 Folder ID" : "",
-		"Project" "S" "A360 Project ID" : ""
+	"A360" "M" "Параметры A360 для этого проекта PowerMill." : {
+		"Hub" "S" "ID хаба A360" : "",
+		"Folder" "S" "ID папки A360" : "",
+		"Project" "S" "ID проекта A360" : ""
 	},
-	"ThicknessSets" "M" "A place holder for thickness sets." "22b4ede061a9a27f00002f6900000000" : {
+	"ThicknessSets" "M" "Место под набор припусков." "22b4ede061a9a27f00002f6900000000" : {
 	},
-	"PartName" "S" "Part name for this project." "22b4eb2061a9a27f00002f6b00000000" : "",
-	"ProjectHistory" "LM" "project history." "22b4eca061a9a27f00002f6d00000000" : (
+	"PartName" "S" "Имя детали для этого проекта." "22b4eb2061a9a27f00002f6b00000000" : "",
+	"ProjectHistory" "LM" "история проекта." "22b4eca061a9a27f00002f6d00000000" : (
 		{
-			"ClientName" "S" "Client product name." "22b4f6a061a9a27f00002f6f00000000" : "PowerMill",
-			"ClientVersion" "S" "Client product version." "22b4f5a061a9a27f00002f7100000000" : "2021000",
-			"DmkCodebase" "S" "Delcam libraries codebase number." "22b4f2a061a9a27f00002f7300000000" : "2021009"
+			"ClientName" "S" "Имя клиентского ПО." "22b4f6a061a9a27f00002f6f00000000" : "PowerMill",
+			"ClientVersion" "S" "Версия клиентского ПО." "22b4f5a061a9a27f00002f7100000000" : "2021000",
+			"DmkCodebase" "S" "Codebase библиотек." "22b4f2a061a9a27f00002f7300000000" : "2021009"
 		}
 	),
-	"Tolerances" "M" "A place holder for tolerance values." "22b4f14061a9a27f00002f7500000000" : {
+	"Tolerances" "M" "Место под значения допусков." "22b4f14061a9a27f00002f7500000000" : {
 	},
-	"OrderNumber" "S" "Order number for this project." "22b4f16061a9a27f00002f7700000000" : "",
-	"Notes" "S" "Notes for this project." "22b4f82061a9a27f00002f7900000000" : ""
+	"OrderNumber" "S" "Номер заказа проекта." "22b4f16061a9a27f00002f7700000000" : "",
+	"Notes" "S" "Описание этого проекта." "22b4f82061a9a27f00002f7900000000" : ""
 }

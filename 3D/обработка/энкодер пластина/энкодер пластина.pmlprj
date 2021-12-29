@@ -1,0 +1,14 @@
+11 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 дек 2021 08.35.07
+x45b5ebc061c057b40003874e00000000.pmlent pmlEntLevel 'Config-0-Partition'
+x4374da4061c0580d0003f92400000000.pmlent pmlEntWorkplane '1'
+x22892f2061c0581c0004028600000000.pmlent pmlEntTool 'EM3x2'
+x42eb06c061c0582e000422ba00000000.pmlent pmlEntToolpath 'пластина отв д3'
+x42e8953061c058a300049d6000000000.pmlent pmlEntBoundary '1'
+x458d40c061c058b20004d05000000000.pmlent pmlEntToolpath 'пластина окно д3'
+x48f78d0061c059860005e93c00000000.pmlent pmlEntToolpath 'пластина профиль д3'
+x6268bfc061c05993000632ad00000000.pmlent pmlEntBoundary '2'
+x4330f0b061c0584000044dc700000000.pmlent pmlEntNCProgram 'пластина д3'
+x43a5dbe061c057b1000384e200000000.pmlent pmlEntModel 'держатель энкодера пластина'
+x434b3c3061c163b70001f88800000000.pmlent pmlEntFeature '1'

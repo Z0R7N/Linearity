@@ -1,5 +1,5 @@
 4 1 # Active Entities (DO NOT EDIT!)
-4dac58d061a9a44b0003c1c900000000 pmlEntBoundary '1_1'
-4d4f77f061a9a44a0003b5d200000000 pmlEntToolpath 'плата загот 3шт д2_1'
 450d509061a9a2d30000ba1c00000000 pmlEntWorkplane '1'
 22d5f66061a9a2b50000625d00000000 pmlEntTool 'EM2x2'
+43a92f7061c1bbb70001d4b600000000 pmlEntToolpath 'плата загот 2шт д2_1'
+43ea4ee061c1bbb70001e01900000000 pmlEntBoundary '1_1_1'

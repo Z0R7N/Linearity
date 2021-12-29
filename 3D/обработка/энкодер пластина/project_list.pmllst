@@ -1,0 +1,45 @@
+type list
+version 0
+Toolpath\
+Toolpath\пластина отв д3
+Toolpath\пластина окно д3
+Toolpath\пластина профиль д3
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\2
+Macro\
+Featureset\
+Featureset\1
+NCProgram\
+NCProgram\пластина д3
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM3x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\держатель энкодера пластина
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\

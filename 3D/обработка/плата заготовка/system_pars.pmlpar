@@ -1,6 +1,6 @@
 {
 	"type" : "powermill",
-	"time" : "1638507666",
+	"time" : "1640086943",
 	"version" : "1"
 }
 {
@@ -196,7 +196,7 @@
 	"Simulation" : {
 		"Interpolation" : "linear",
 		"PlayMode" : "feedrate",
-		"Speed" : "30.0",
+		"Speed" : "13.0",
 		"Issues" : {
 			"PlaybackSetting" : "firstonly"
 		},

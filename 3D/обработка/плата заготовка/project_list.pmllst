@@ -3,6 +3,8 @@ version 0
 Toolpath\
 Toolpath\плата загот 3шт д2
 Toolpath\плата загот 3шт д2_1
+Toolpath\плата загот 2шт д2
+Toolpath\плата загот 2шт д2_1
 Group\
 Pattern\
 Workplane\
@@ -12,10 +14,13 @@ FeatureGroup\
 Boundary\
 Boundary\1
 Boundary\1_1
+Boundary\1_2
+Boundary\1_1_1
 Macro\
 Featureset\
 NCProgram\
 NCProgram\плата загот 3шт д2
+NCProgram\плата загот 2шт д2
 Level\
 Level\Config-0-Partition
 Tool\
@@ -25,3 +30,19 @@ MachineTool\
 StockModel\
 Model\
 Model\плата заготовка
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\

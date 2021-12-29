@@ -1,0 +1,15 @@
+12 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 дек 2021 07.09.52
+x42eb374061c05a6c0007eef200000000.pmlent pmlEntLevel 'Config-0-Partition'
+x45f3c55061c05acf00082deb00000000.pmlent pmlEntTool 'EM 4x2'
+x6207848061c05ae70008379900000000.pmlent pmlEntToolpath 'стойка д4'
+x4659f1c061c05bf2000900e200000000.pmlent pmlEntWorkplane '2'
+x42e9055061c05c7a0009818c00000000.pmlent pmlEntWorkplane '1'
+x4659234061c05c900009abcd00000000.pmlent pmlEntTool 'центровка2,5х2'
+x486b2cc061c05ca60009bb3f00000000.pmlent pmlEntToolpath 'стойка центр д2'
+x430127c061c05c610009618400000000.pmlent pmlEntNCProgram 'стойка д4'
+x6264d24061c05d79000a1fef00000000.pmlent pmlEntNCProgram 'стойка центр д2'
+x621d832061c05a690007ed6700000000.pmlent pmlEntModel 'держатель энкодера стойка'
+x47efe95061c1532a0000e7b200000000.pmlent pmlEntWorkplane '3'
+x41ec61c061c15369000173ed00000000.pmlent pmlEntFeature '1'

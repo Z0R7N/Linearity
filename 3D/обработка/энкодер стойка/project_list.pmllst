@@ -1,0 +1,46 @@
+type list
+version 0
+Toolpath\
+Toolpath\стойка д4
+Toolpath\стойка центр д2
+Group\
+Pattern\
+Workplane\
+Workplane\2
+Workplane\1
+Workplane\3
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+Featureset\1
+NCProgram\
+NCProgram\стойка д4
+NCProgram\стойка центр д2
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM 4x2
+Tool\центровка2,5х2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\держатель энкодера стойка
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\
