@@ -1,10 +1,9 @@
 #define an2 2
 #define an3 3
 
-#define in1 8
-#define in2 9
-#define in3 10
-#define in4 11
+#define in1 5
+#define in2 6
+#define in3 4
 
 bool go = false;// move
 bool cw = true; // direction
@@ -214,4 +213,3 @@ void turnClockwice(){
 	digitalWrite(in4, HIGH);
 	delay(dl);
 }
-
