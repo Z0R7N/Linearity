@@ -3,8 +3,8 @@
 + - вращение по часовой стрелке
 - - вращение против часовой
 число - угол на который надо поставить ось мотора
-ss число - установить скорость, от 1 до 9
-sa число - установить ускорение от 1 до 9
+ssчисло - установить скорость, от 1 до 9
+saчисло - установить ускорение от 1 до 9
 */
 
 #define en2 2
@@ -203,16 +203,6 @@ void instruction(){
 	Serial.println("saчисло - установить ускорение от 1 до 9");
 }
 
-// acceleration start moving
-int accelSpeed() {
-	
-}
-
-// slowdown end moving
-int slowdownSpeed(){
-	
-}
-
 // setting parameters for moving
 void setParam (){
 	if (!cw) {
@@ -250,14 +240,6 @@ void startMoveAccel(){
 	beginPth = calculatePath();
 	pathMotor = encdr - newAngl;
 	pathMotor = pathMotor < 0 ? pathMotor * -1 : pathMotor;
-}
-
-// changing speed for motor
-void changeSpeed() {
-	if (pathMotor > (stepAccel * 2)) {
-	}
-	else{
-	}
 }
 
 // move to new angle
