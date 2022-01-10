@@ -14,11 +14,11 @@ saчисло - установить ускорение от 1 до 9
 #define DIR 6 // direction for driver
 #define ENA 4 // enable
 
-int maxPs = 2000;
-int minPs = 400;
+int maxPs = 1000;
+int minPs = 50;
 
 String ser = "";		// string from serial
-int ps = 400; 			// delay for pause (400 minimum & 2000 maximum)
+int ps = minPs;			// delay for pause (400 minimum & 2000 maximum)
 int oldPs = ps;			// for counting delay
 int acc = 5;			// acceleration motor speed
 long encdr = 0;			// counting encoder
@@ -231,8 +231,8 @@ void setParam (){
 
 // setting for start moving with acceleration
 void startMoveAccel(){
-	Serial.print("angle new = ");
-	Serial.println(newAngl);
+	// Serial.print("angle new = ");
+	// Serial.println(newAngl);
 	accCheck = 1;
 	oldEncdr = encdr;
 	oldPs = ps;
