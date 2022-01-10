@@ -18,34 +18,36 @@ int maxPs = 1000;
 int minPs = 50;
 
 String ser = "";		// string from serial
-int ps = minPs;			// delay for pause (400 minimum & 2000 maximum)
+int ps = 150;			// delay for pause (400 minimum & 2000 maximum)
 int oldPs = ps;			// for counting delay
 int acc = 5;			// acceleration motor speed
 long encdr = 0;			// counting encoder
 long oldEncdr = encdr;	// for counting delay
-long newAngl;			// angle there motor must move
-long preAngl;			// angle there motor must move before new angle
+double newAngl;			// angle there motor must move
+double preAngl;			// angle there motor must move before new angle
 bool go = false; 		// if "true" motor rotate
-bool cw = true;			// clockwise or counterclockwise rotating
+bool cw = false;		// clockwise or counterclockwise rotating
 int accCheck = 0;		// 1 - acceleration; 0 - even movement; -1 - slow down
 int pathMotor = 0;		// length which must count encoder
 int stepAccel = 0; 		// path to acceleration and slow down
 int beginPth;			// start encoder number
 int coefAccel = 3;		// koefficient for acceleration
-int coefAngl = 15;		// koefficient for pre angle
-
+int coefAngl = 5;		// koefficient for pre angle
+int newEn = 0;
 
 void inter() {
 	if(!cw && digitalRead(DIR) == HIGH) {
 		encdr++;
+		newEn++;
 		if (encdr >= newAngl) {
 			go = false;
 			// Serial.print(go);
-			// Serial.println(" go false");
+//			 Serial.println("lse");
 		}
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
 		encdr--;
+		newEn--;
 		if (encdr <= newAngl) {
 			go = false;
 			// Serial.print(go);
@@ -54,6 +56,7 @@ void inter() {
 	}
 	else if (cw && digitalRead(DIR) == LOW) {
 		encdr++;
+		newEn++;
 		if (encdr >= newAngl) {
 			go = false;
 			// Serial.print(go);
@@ -62,6 +65,7 @@ void inter() {
 	}
 	else if (cw && digitalRead(DIR) == HIGH) {
 		encdr--;
+		newEn--;
 		if (encdr <= newAngl) {
 			go = false;
 			// Serial.print(go);
@@ -114,7 +118,10 @@ void getCommand(String com){
 		// Serial.println(num);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
-	if (com == "*") encdr = 0;
+	if (com == "*") {
+		encdr = 0;
+		newEn = 0;
+	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
 		cw = true;
@@ -147,12 +154,17 @@ void getCommand(String com){
 
 // setting angle
 void angleSet(long a){
-	double tmp = a * 100 / 360;
-	preAngl = tmp * 512 / 100;
-	newAngl = preAngl - coefAngl;
-	if (newAngl < encdr) {
-		setParam();
-	}
+	Serial.println(a);
+	double tmp = a * 1.422222;
+	Serial.println(tmp);
+	preAngl = round(tmp);
+	Serial.println(preAngl);
+	newAngl = preAngl;
+	Serial.println();
+//	newAngl = preAngl - coefAngl;
+//	if (newAngl < encdr) {
+//		setParam();
+//	}
 	newAngl = preAngl;
 	setParam();
 }
@@ -183,8 +195,8 @@ int speedMotor(String s){
 		// Serial.println(speed);
 		speed = 9 - speed;
 		speed = speed * 100 / 8;
-		speed = 1600 * speed / 100;
-		res = speed + 400;
+		speed = 950 * speed / 100;
+		res = speed + 50;
 	}
 	// Serial.println(res + " - calcul speed res = ");
 	// Serial.println(s + " string coming");
@@ -278,6 +290,12 @@ void move(){
 		stepSM();
 	}
 	ps = oldPs;
+ Serial.println(newEn);
+ double xx = newEn / 1.422222;
+ Serial.println(xx);
+ Serial.println(round(xx));
+ Serial.println("-----------------------------");
+ Serial.println();
 }
 
 // check path for slow down motor
