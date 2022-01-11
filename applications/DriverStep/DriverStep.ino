@@ -2,7 +2,7 @@
 * - задает нулевую точку
 + - вращение по часовой стрелке
 - - вращение против часовой
-/ - вращение на 5'
+/ - вращение на 3'
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
@@ -18,6 +18,45 @@ saчисло - установить ускорение от 1 до 9
 int maxPs = 1000;
 int minPs = 80;
 
+String ser = "";					// string from serial
+long mainAngle = 0;					// countong for angle of position steper motor (from 0 to 51200)
+long newAngl = 0;					// angle for motor move
+long preAngl;						// angle there motor must move before new angle
+int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
+long encdr = 0;						// counting encoder
+double angleStep = 142,2222222222;	// coefficient for convert microstep to angle
+bool cw = false;					// clockwise or counterclockwise rotating
+
+void inter() {
+	if(!cw && digitalRead(DIR) == HIGH) {
+		encdr++;
+		if (encdr >= newAngl) {
+			// Serial.print(go);
+//			 Serial.println("lse");
+		}
+	}
+	else if (!cw && digitalRead(DIR) == LOW) {
+		encdr--;
+		if (encdr <= newAngl) {
+			// Serial.print(go);
+			// Serial.println(" go false");
+		}
+	}
+	else if (cw && digitalRead(DIR) == LOW) {
+		encdr++;
+		if (encdr >= newAngl) {
+			// Serial.print(go);
+			// Serial.println(" go false");
+		}
+	}
+	else if (cw && digitalRead(DIR) == HIGH) {
+		encdr--;
+		if (encdr <= newAngl) {
+			// Serial.print(go);
+			// Serial.println(" go false");
+		}
+	}
+}
 
 // send pulse to driver
 void stepSM(){
@@ -27,4 +66,181 @@ void stepSM(){
 	delayMicroseconds(ps);
 	if(!go) return;
 	digitalWrite(PUL, LOW);
+}
+
+// recognising commands got from port
+void getCommand(String com){
+	String st = "";
+	double num = -1;
+	if (com.length() > 0) {
+		num = com.toDouble();
+		// Serial.println(num);
+	}
+	if (com.length() > 2) st = com.substring(0, 2);
+	if (com == "*") {
+		mainAngle = 0;
+		encdr = 0;
+	}
+	else if (com == "+") {
+		digitalWrite(DIR, HIGH);
+		cw = true;
+	}
+	else if (com == "-") {
+		digitalWrite(DIR, LOW);
+		cw = false;
+	}
+	else if (com == "/") {
+		angleSet(mainAngle + 2);
+	}
+	else if (st == "ss") {
+		String spd = com.substring(2);
+		// Serial.println(spd + " get command ss");
+		ps = speedMotor(spd);
+		// Serial.print("ps ");
+		// Serial.println(ps);
+	}
+	else if (st == "sa") {
+		String accel = com.substring(2);
+		acc = accelerationMotor(accel);
+	}
+	else if (num > 0) {
+		angleSet(num);
+	}
+	else if (com == "0") {
+		angleSet(0);
+	}
+	else {
+		instruction();
+	}
+}
+
+// setting angle
+void angleSet(double a){
+	Serial.println(a);
+	double tmp = a * angleStep;
+	Serial.println(tmp);
+	preAngl = round(tmp);
+	Serial.println(preAngl);
+	newAngl = preAngl;
+	Serial.println();
+//	newAngl = preAngl - coefAngl;
+//	if (newAngl < encdr) {
+//		setParam();
+//	}
+	newAngl = preAngl;
+	setParam();
+}
+
+// instruction
+void instruction(){
+	Serial.println("команды");
+	Serial.println("* - задает нулевую точку");
+	Serial.println("+ - вращение по часовой стрелке");
+	Serial.println("- - вращение против часовой");
+	Serial.println("/ - вращение на 3'");
+	Serial.println("число - угол на который надо поставить ось мотора");
+	Serial.println("ssчисло - установить скорость, от 1 до 9");
+	Serial.println("saчисло - установить ускорение от 1 до 9");
+}
+
+// calculating speed
+int speedMotor(String s){
+	int res = -1;
+	double speed = s.toDouble();
+	if (speed > 9 || speed < 1 || s.length() == 0) {
+		instruction();
+	}
+	else{
+		// Serial.print("calculate speed ");
+		// Serial.println(speed);
+		speed = 9 - speed;
+		speed = speed * 100 / 8;
+		speed = 950 * speed / 100;
+		res = round(speed);
+		res += 50;
+	}
+	// Serial.println(res + " - calcul speed res = ");
+	// Serial.println(s + " string coming");
+	res = res == -1 ? ps : res;
+	return res;
+}
+
+// calculating acceleration
+int accelerationMotor(String a){
+	int res = -1;
+	int acceleration = a.toInt();
+	if (acceleration > 9 || acceleration < 1 || a.length() == 0) {
+		instruction();
+	}
+	else {
+		res = acceleration;
+	}
+	res = res == -1 ? acc : res;
+	return res;
+}
+
+// setting parameters for moving
+void setParam (){
+	if (!cw) {
+		if (mainAngle < newAngl) {
+			digitalWrite(DIR, HIGH);
+		}
+		else {
+			digitalWrite(DIR, LOW);
+		}
+	}
+	else {
+		if (mainAngle > newAngl) {
+			digitalWrite(DIR, HIGH);
+		}
+		else {
+			digitalWrite(DIR, LOW);
+		}
+	}
+	// Serial.println(go);
+	if (newAngl != mainAngle) move();
+}
+
+// move to new angle
+void move() {
+	int n = mainAngle - newAngl;
+	n = n < 0 ? n * -1 : n;
+	for (int i = 0; i < n; i++) {
+		stepSM();
+	}		
+}
+
+void setup() {
+  pinMode(PUL, OUTPUT);
+  pinMode(DIR, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(en2, INPUT);
+  pinMode(en3, INPUT);
+  //digitalWrite(ENA, HIGH);
+  digitalWrite(ENA, LOW);
+  // digitalWrite(DIR, HIGH);
+  digitalWrite(DIR, LOW);
+  Serial.begin(115200);
+  attachInterrupt (0, inter, CHANGE);
+  attachInterrupt (1, inter, CHANGE);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+	if (Serial.available() > 0){
+		ser = "";
+		char sr = Serial.read();
+		while (int(sr) != 10){
+			ser += sr;
+			delay(2);
+			sr = Serial.read();
+		}
+	}
+	else {
+		if (ser != ""){
+			// Serial.println(ser + " - loop port coming");
+			getCommand(ser);
+			ser = "";
+		}
+	}
 }
