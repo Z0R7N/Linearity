@@ -2,6 +2,7 @@
 * - задает нулевую точку
 + - вращение по часовой стрелке
 - - вращение против часовой
+/ - вращение на 21'
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
@@ -15,7 +16,7 @@ saчисло - установить ускорение от 1 до 9
 #define ENA 4 // enable
 
 int maxPs = 1000;
-int minPs = 50;
+int minPs = 80;
 
 String ser = "";		// string from serial
 int ps = 150;			// delay for pause (400 minimum & 2000 maximum)
@@ -23,7 +24,7 @@ int oldPs = ps;			// for counting delay
 int acc = 5;			// acceleration motor speed
 long encdr = 0;			// counting encoder
 long oldEncdr = encdr;	// for counting delay
-double newAngl;			// angle there motor must move
+double newAngl = 0;		// angle there motor must move
 double preAngl;			// angle there motor must move before new angle
 bool go = false; 		// if "true" motor rotate
 bool cw = false;		// clockwise or counterclockwise rotating
@@ -112,9 +113,9 @@ void loop() {
 // recognising commands got from port
 void getCommand(String com){
 	String st = "";
-	long num = -1;
+	double num = -1;
 	if (com.length() > 0) {
-		num = com.toInt();
+		num = com.toDouble();
 		// Serial.println(num);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
@@ -129,6 +130,9 @@ void getCommand(String com){
 	else if (com == "-") {
 		digitalWrite(DIR, LOW);
 		cw = false;
+	}
+	else if (com == "/") {
+		angleSet(newAngl + 1);
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
@@ -153,7 +157,7 @@ void getCommand(String com){
 }
 
 // setting angle
-void angleSet(long a){
+void angleSet(double a){
 	Serial.println(a);
 	double tmp = a * 2.844444444444;
 	Serial.println(tmp);
@@ -211,6 +215,7 @@ void instruction(){
 	Serial.println("* - задает нулевую точку");
 	Serial.println("+ - вращение по часовой стрелке");
 	Serial.println("- - вращение против часовой");
+	Serial.println("/ - вращение на 21'");
 	Serial.println("число - угол на который надо поставить ось мотора");
 	Serial.println("ssчисло - установить скорость, от 1 до 9");
 	Serial.println("saчисло - установить ускорение от 1 до 9");
