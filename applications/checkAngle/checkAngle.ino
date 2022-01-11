@@ -5,7 +5,7 @@
 #define DIR 6 // direction for driver
 #define ENA 4 // enable
 
-int ps = 1000; 			// delay for pause (50 minimum & 1000 maximum)
+int ps = 100; 			// delay for pause (50 minimum & 1000 maximum)
 int acc = 5;			// acceleration motor speed
 long encdr = 0;			// counting encoder
 
@@ -31,8 +31,8 @@ void setup() {
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
   Serial.begin(115200);
-  attachInterrupt (0, inter, FALLING);
-  attachInterrupt (1, inter, FALLING);
+  attachInterrupt (0, inter, CHANGE);
+  attachInterrupt (1, inter, CHANGE);
 }
 
 void loop() {

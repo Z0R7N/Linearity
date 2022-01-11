@@ -85,8 +85,8 @@ void setup() {
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
   Serial.begin(115200);
-  attachInterrupt (0, inter, FALLING);
-  attachInterrupt (1, inter, FALLING);
+  attachInterrupt (0, inter, CHANGE);
+  attachInterrupt (1, inter, CHANGE);
 }
 
 // the loop function runs over and over again forever
@@ -155,7 +155,7 @@ void getCommand(String com){
 // setting angle
 void angleSet(long a){
 	Serial.println(a);
-	double tmp = a * 1.422222;
+	double tmp = a * 2.844444444444;
 	Serial.println(tmp);
 	preAngl = round(tmp);
 	Serial.println(preAngl);
@@ -196,7 +196,8 @@ int speedMotor(String s){
 		speed = 9 - speed;
 		speed = speed * 100 / 8;
 		speed = 950 * speed / 100;
-		res = speed + 50;
+		res = round(speed);
+		res += 50;
 	}
 	// Serial.println(res + " - calcul speed res = ");
 	// Serial.println(s + " string coming");
@@ -291,7 +292,7 @@ void move(){
 	}
 	ps = oldPs;
  Serial.println(newEn);
- double xx = newEn / 1.422222;
+ double xx = newEn / 2.844444444444;
  Serial.println(xx);
  Serial.println(round(xx));
  Serial.println("-----------------------------");
