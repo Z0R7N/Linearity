@@ -22,10 +22,12 @@ String ser = "";					// string from serial
 long mainAngle = 0;					// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
+int acc = 5;						// acceleration motor speed
 int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
-double angleStep = 142,2222222222;	// coefficient for convert microstep to angle
+double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 bool cw = false;					// clockwise or counterclockwise rotating
+
 
 void inter() {
 	if(!cw && digitalRead(DIR) == HIGH) {
@@ -60,12 +62,22 @@ void inter() {
 
 // send pulse to driver
 void stepSM(){
-	delayMicroseconds(ps);
-	if(!go) return;
 	digitalWrite(PUL, HIGH);
 	delayMicroseconds(ps);
-	if(!go) return;
 	digitalWrite(PUL, LOW);
+	delayMicroseconds(ps);
+	if(!cw && digitalRead(DIR) == HIGH) {
+		mainAngle++;
+	}
+	else if (!cw && digitalRead(DIR) == LOW) {
+		mainAngle--;
+	}
+	else if (cw && digitalRead(DIR) == LOW) {
+		mainAngle++;
+	}
+	else if (cw && digitalRead(DIR) == HIGH) {
+		mainAngle--;
+	}
 }
 
 // recognising commands got from port
@@ -78,6 +90,7 @@ void getCommand(String com){
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
+		Serial.println("main !! angle = 0");
 		mainAngle = 0;
 		encdr = 0;
 	}
@@ -232,7 +245,7 @@ void loop() {
 		char sr = Serial.read();
 		while (int(sr) != 10){
 			ser += sr;
-			delay(2);
+			delay(5);
 			sr = Serial.read();
 		}
 	}
@@ -240,6 +253,8 @@ void loop() {
 		if (ser != ""){
 			// Serial.println(ser + " - loop port coming");
 			getCommand(ser);
+			Serial.print("main angle = ");
+			Serial.println(mainAngle);
 			ser = "";
 		}
 	}

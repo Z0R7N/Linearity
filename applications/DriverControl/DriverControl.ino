@@ -8,6 +8,8 @@ ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
 */
 
+!! application do not need !!
+
 #define en2 2
 #define en3 3
 
