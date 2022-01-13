@@ -27,36 +27,37 @@ int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 bool cw = false;					// clockwise or counterclockwise rotating
+int coefAngl = 142;					// coefficient for pre angle
 
 
 void inter() {
 	if(!cw && digitalRead(DIR) == HIGH) {
 		encdr++;
-		if (encdr >= newAngl) {
+		// if (encdr >= newAngl) {
 			// Serial.print(go);
 //			 Serial.println("lse");
-		}
+		// }
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
 		encdr--;
-		if (encdr <= newAngl) {
+		// if (encdr <= newAngl) {
 			// Serial.print(go);
 			// Serial.println(" go false");
-		}
+		// }
 	}
 	else if (cw && digitalRead(DIR) == LOW) {
 		encdr++;
-		if (encdr >= newAngl) {
+		// if (encdr >= newAngl) {
 			// Serial.print(go);
 			// Serial.println(" go false");
-		}
+		// }
 	}
 	else if (cw && digitalRead(DIR) == HIGH) {
 		encdr--;
-		if (encdr <= newAngl) {
+		// if (encdr <= newAngl) {
 			// Serial.print(go);
 			// Serial.println(" go false");
-		}
+		// }
 	}
 }
 
@@ -90,7 +91,7 @@ void getCommand(String com){
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
-		Serial.println("main !! angle = 0");
+		Serial.println("угол 0");
 		mainAngle = 0;
 		encdr = 0;
 	}
@@ -129,17 +130,21 @@ void getCommand(String com){
 
 // setting angle
 void angleSet(double a){
-	Serial.println(a);
+	// Serial.println(a);
 	double tmp = a * angleStep;
-	Serial.println(tmp);
+	// Serial.println(tmp);
 	preAngl = round(tmp);
-	Serial.println(preAngl);
+	// Serial.println(preAngl);
 	newAngl = preAngl;
-	Serial.println();
-//	newAngl = preAngl - coefAngl;
-//	if (newAngl < encdr) {
-//		setParam();
-//	}
+	// Serial.println();
+	newAngl = preAngl - coefAngl;
+	Serial.println("pre and new angles");
+	Serial.print(preAngl);
+	Serial.print("        ");
+	Serial.println(newAngl);
+	if (newAngl < mainAngle) {
+		setParam();
+	}
 	newAngl = preAngl;
 	setParam();
 }
@@ -153,7 +158,7 @@ void instruction(){
 	Serial.println("/ - вращение на 3'");
 	Serial.println("число - угол на который надо поставить ось мотора");
 	Serial.println("ssчисло - установить скорость, от 1 до 9");
-	Serial.println("saчисло - установить ускорение от 1 до 9");
+	//Serial.println("saчисло - установить ускорение от 1 до 9");
 }
 
 // calculating speed
@@ -168,9 +173,9 @@ int speedMotor(String s){
 		// Serial.println(speed);
 		speed = 9 - speed;
 		speed = speed * 100 / 8;
-		speed = 950 * speed / 100;
+		speed = 920 * speed / 100;
 		res = round(speed);
-		res += 50;
+		res += 80;
 	}
 	// Serial.println(res + " - calcul speed res = ");
 	// Serial.println(s + " string coming");
@@ -216,11 +221,20 @@ void setParam (){
 
 // move to new angle
 void move() {
-	int n = mainAngle - newAngl;
+	long n = mainAngle - newAngl;
 	n = n < 0 ? n * -1 : n;
+	// Serial.println("main  and  new  Angles");
+	// Serial.print(mainAngle);
+	// Serial.print("steps to move = ");
+	// Serial.println(n);
 	for (int i = 0; i < n; i++) {
 		stepSM();
-	}		
+	}
+	Serial.print("угол = ");
+	Serial.println(newAngl);
+	Serial.print("encoder = ");
+	Serial.println(encdr);
+	Serial.println();
 }
 
 void setup() {
@@ -253,8 +267,8 @@ void loop() {
 		if (ser != ""){
 			// Serial.println(ser + " - loop port coming");
 			getCommand(ser);
-			Serial.print("main angle = ");
-			Serial.println(mainAngle);
+			// Serial.print("main angle = ");
+			// Serial.println(mainAngle);
 			ser = "";
 		}
 	}
