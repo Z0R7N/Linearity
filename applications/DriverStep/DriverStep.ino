@@ -27,7 +27,7 @@ int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 bool cw = false;					// clockwise or counterclockwise rotating
-int coefAngl = 142;					// coefficient for pre angle
+int coefAngl = 800;					// coefficient for pre angle
 
 
 void inter() {
