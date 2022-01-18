@@ -130,19 +130,14 @@ void getCommand(String com){
 
 // setting angle
 void angleSet(double a){
-	// Serial.println(a);
 	double tmp = a * angleStep;
-	// Serial.println(tmp);
 	preAngl = round(tmp);
-	// Serial.println(preAngl);
-	newAngl = preAngl;
-	// Serial.println();
 	newAngl = preAngl - coefAngl;
 	Serial.println("pre and new angles");
 	Serial.print(preAngl);
 	Serial.print("        ");
 	Serial.println(newAngl);
-	if (newAngl < mainAngle) {
+	if (preAngl < mainAngle) {
 		setParam();
 	}
 	newAngl = preAngl;
@@ -265,10 +260,12 @@ void loop() {
 	}
 	else {
 		if (ser != ""){
-			// Serial.println(ser + " - loop port coming");
+			Serial.println();
+			Serial.println("==================");
+			Serial.println("==================");
+			Serial.print("serial = ");
+			Serial.println(ser);
 			getCommand(ser);
-			// Serial.print("main angle = ");
-			// Serial.println(mainAngle);
 			ser = "";
 		}
 	}
