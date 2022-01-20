@@ -77,18 +77,18 @@ Sub saveNamePort()
 End Sub
 
 '------------------------------------------------------
-'ddPorts (ýëåìåíò: dropDown, àòðèáóò: getItemCount), 2007
+'ddPorts (элемент: dropDown, атрибут: getItemCount), 2007
 Private Sub ddCount(control As IRibbonControl, ByRef count)
     Call scanPorts
     count = uBoundVar + 1
 End Sub
 
-'ddPorts (ýëåìåíò: dropDown, àòðèáóò: getItemLabel), 2007
+'ddPorts (элемент: dropDown, атрибут: getItemLabel), 2007
 Private Sub ddLabel(control As IRibbonControl, index As Integer, ByRef label)
     label = ports(index)
 End Sub
 
-'ddPorts (ýëåìåíò: dropDown, àòðèáóò: onAction), 2007
+'ddPorts (элемент: dropDown, атрибут: onAction), 2007
 Private Sub ddClicked(control As IRibbonControl, selectedId As String, selectedIndex As Integer)
     If uBoundVar >= 0 Then
         workingPort = ports(selectedIndex)
@@ -96,26 +96,26 @@ Private Sub ddClicked(control As IRibbonControl, selectedId As String, selectedI
     End If
 End Sub
 
-'ddPorts (ýëåìåíò: dropDown, àòðèáóò: getSelectedItemIndex), 2007
+'ddPorts (элемент: dropDown, атрибут: getSelectedItemIndex), 2007
 Private Sub ddSelect(control As IRibbonControl, ByRef index)
     Call readNamePort
     index = numPort
 End Sub
 '-----------------------------------------------------------
 
-'btnScan (ýëåìåíò: button, àòðèáóò: onAction), 2007
+'btnScan (элемент: button, атрибут: onAction), 2007
 Private Sub scanerPortsBtn(control As IRibbonControl)
     'Call scanPort
     Call ShipRegion_KeyPress
 End Sub
 
-'btnStart (ýëåìåíò: button, àòðèáóò: onAction), 2007
+'btnStart (элемент: button, атрибут: onAction), 2007
 Private Sub StartReadingBtn(control As IRibbonControl)
     Call startRequest
 End Sub
 
 
-'btnStop (ýëåìåíò: button, àòðèáóò: onAction), 2007
+'btnStop (элемент: button, атрибут: onAction), 2007
 Private Sub StopReadingBtn(control As IRibbonControl)
     Call stopRequest
 End Sub
