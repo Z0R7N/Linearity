@@ -1,3 +1,5 @@
+проверить есть ли ответ порта при вращении
+
 /*  команды
 * - задает нулевую точку
 + - вращение по часовой стрелке
@@ -6,11 +8,9 @@
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
-hlo - запрос на проверку порта
 e - запрос на число энкодера
+hlo - запрос на проверку порта
 */
-
-изменить скорость подхода к нужному углу при убирании люфта
 
 #define en2 2
 #define en3 3
@@ -32,6 +32,7 @@ long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 bool cw = false;					// clockwise or counterclockwise rotating
 int coefAngl = 800;					// coefficient for pre angle
+bool rotate = false;				// bool value for checking rotation
 
 
 void inter() {
@@ -110,6 +111,12 @@ void getCommand(String com){
 	else if (com == "/") {
 		angleSet(mainAngle + 2);
 	}
+	else if (com == "hlo") {
+		Serial.println("qpzm10qqf");
+	}
+	else if (com == "e") {
+		Serial.println(encdr);
+	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
 		// Serial.println(spd + " get command ss");
@@ -142,7 +149,10 @@ void angleSet(double a){
 	Serial.print("        ");
 	Serial.println(newAngl);
 	if (preAngl < mainAngle) {
+		int tmpAcc = acc;
+		acc = 1;
 		setParam();
+		acc = tmpAcc;
 	}
 	newAngl = preAngl;
 	setParam();
@@ -157,7 +167,9 @@ void instruction(){
 	Serial.println("/ - вращение на 3'");
 	Serial.println("число - угол на который надо поставить ось мотора");
 	Serial.println("ssчисло - установить скорость, от 1 до 9");
-	//Serial.println("saчисло - установить ускорение от 1 до 9");
+	Serial.println("saчисло - установить ускорение от 1 до 9");
+	Serial.println("e - запрос на число энкодера");
+	Serial.println("hlo - запрос на проверку порта");
 }
 
 // calculating speed
@@ -222,6 +234,7 @@ void setParam (){
 void move() {
 	long n = mainAngle - newAngl;
 	n = n < 0 ? n * -1 : n;
+	rotate = true;
 	// Serial.println("main  and  new  Angles");
 	// Serial.print(mainAngle);
 	// Serial.print("steps to move = ");
@@ -229,6 +242,7 @@ void move() {
 	for (int i = 0; i < n; i++) {
 		stepSM();
 	}
+	rotate = false;
 	Serial.print("угол = ");
 	Serial.println(newAngl);
 	Serial.print("encoder = ");
