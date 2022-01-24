@@ -6,7 +6,7 @@ int buf;
 void setup() {
   pinMode(led14, OUTPUT);
   pinMode(led16, OUTPUT);
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 
 void loop() {
