@@ -4,6 +4,10 @@ String result = "!";
 String ser;
 int LED = 13;
 
+
+//declare a function reset with address 0
+void(* resetFunc) (void) = 0;
+
 void setup() {
 	pinMode(LED, OUTPUT);
   Serial.begin(9600);
@@ -20,7 +24,7 @@ void loop() {
 		char sr = Serial.read();
 		while (int(sr) != 13 && int(sr) != 10 && int(sr) != -1){
 			// Serial.println(int(sr));
-			saveEEPROM(cnt, sr);
+			//saveEEPROM(cnt, sr);
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
@@ -29,6 +33,7 @@ void loop() {
 	}
 	else {
 		if (ser != ""){
+			if (ser == "reset23") resetFunc();
 			// Serial.println();
 			// Serial.println("==================");
 			// Serial.println("==================");
@@ -37,8 +42,8 @@ void loop() {
 			answer(ser);
 			ser = "";
 		}
-		digitalWrite(LED, 0);
-		delay(500);
+		//digitalWrite(LED, 0);
+		//delay(500);
 	}
 }
 	
@@ -69,11 +74,12 @@ void answer(String req) {
 
 void saveEEPROM (int adr, char data) {
 	digitalWrite(LED, 1);
-	delay(400);
-	digitalWrite(LED, 0);
 	delay(200);
+	digitalWrite(LED, 0);
+	delay(50);
 	// char red = EEPROM.read(adr);
 	// if(data != red){
 		// EEPROM.write(adr, data);
 	// }
 }
+

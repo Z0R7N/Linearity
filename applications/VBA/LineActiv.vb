@@ -1,146 +1,68 @@
-Option Explicit On
+Option Explicit
 
 Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+Sub ReadCommPC()
+    Dim COMfile As Integer
+    Dim COMfile2 As Integer
+    Dim COMstring As Variant
+    Dim COMstring2 As Variant
+    Dim COMport As String
+    Dim baudrate As Long
+    Dim record_cat As Variant
+    Dim record As String * 1
+    Dim cnt As Integer
+    Dim ComP2 As String
 
-Const maxPort = 19
-Dim ports() As String
-Dim lBoundVar As Long
-Dim uBoundVar As Long
-Dim portExist As Boolean
-Public workingPort As String
-Dim numPort As Long
-Dim passControl As String           ' password for check port control
-Dim portControl As String           ' portControl in range AA2
-Dim portMultimetr As String         ' portMultimetr in range AA1
-Dim work As Boolean
-Dim checkControl As Boolean         ' if port of control rotation is correct
-Dim checkMultimetr As Boolean       ' if port of multimetr is correct
-
-
-
-' press button start check coil
-Sub startCoil(control As IRibbonControl)
-    Call setParameter()
-    MsgBox("start coil")
-End Sub
-
-
-' press button start linearity
-Sub startLine(control As IRibbonControl)
-
-    Call setParameter()
-
-    If verifyPort() Then
-
-    Else
-
-    End If
-
-End Sub
-
-
-' set parameters
-Sub setParameter()
-    work = True
-    Call signalWork()
-    portMultimetr = Range("AA1").Value
-    portControl = Range("AA2").Value
-    passControl = "qpzm10qqf"
-
-End Sub
-
-' verify port
-Function verifyPort() As Boolean
-    verifyPort = False
-    If portMultimetr <> "" Then
-        Call openPort1
-        Sleep(100)
-        MsgBox("open")
-        Dim testData As Double
-        testData = dataMultimetr
-        If testData > 0 Then
-            verifyPort = True
+    COMport = "COM6"   'Enter the COM port here.
+    ComP2 = "COM9"
+    baudrate = 9600       'Enter the baud rate here.
+    Dim Cmnd As String
+    Cmnd = "hlo" & Chr(13)
+    'Open COM port with baud rate, no parity, 8 data bits and 1 stop bit
+    COMfile = FreeFile
+    COMfile2 = FreeFile(2)
+    COMstring = COMport & ":" & baudrate & ",N,8,1"
+    COMstring2 = ComP2 & ":" & baudrate & ",N,8,1"
+    Close #COMfile
+    Close #COMfile2
+    Open COMstring2 For Binary Access Read Write As #COMfile2
+    Open COMstring For Binary Access Read Write As #COMfile
+    Sleep 1700  ' for waiting opening port
+    cnt = 0
+    Do
+        record = ""
+        record_cat = ""
+        Put #COMfile, , Cmnd
+        Put #COMfile2, , Cmnd
+        Sleep 2
+        cnt = cnt + 1
+        If cnt > 3 Then
+            Exit Do
         End If
-    Else
-        Exit Function
-    End If
-
-    If portControl <> "" Then
-        Call openPort2
-    Else
-        'Exit Function
-    End If
-
-
-End Function
-
-Sub scanPorts()
-
-    Dim prt As String
-    Dim i As Long
-
-    Dim portsPro(maxPort) As String
-    Dim numPorts As Long
-    numPorts = -1
-
-
-    For i = 0 To maxPort
-        prt = initCOM("COM" & i, 115200, 8, 0, 1)
-        If prt = "yes" Then
-            portsPro(i) = "COM" & i
-            numPorts = numPorts + 1
-        Else
-            portsPro(i) = "no"
-        End If
-    Next i
-
-    lBoundVar = 0
-    uBoundVar = numPorts
-    ReDim ports(lBoundVar To uBoundVar)
-    numPorts = 0
-
-    For i = 0 To maxPort
-        If portsPro(i) <> "no" Then
-            ports(numPorts) = portsPro(i)
-            numPorts = numPorts + 1
-            If Range("AA1") = portsPro(i) Then portExist = True
-        End If
-    Next i
-    workingPort = ports(0)
-    If Range("AA1") <> "" And portExist Then
-        workingPort = Range("AA1").Value
-    Else
-        Range("AA1") = workingPort
-    End If
-    Call saveNamePort()
-
-    MsgBox("workingPort " & workingPort)
-
+        DoEvents
+        Do
+            Sleep 2
+            Get #COMfile, , record      'data is read in 1 character at a time
+            'Debug.Print record & " " & Asc(record)
+            If record = Chr(13) Then
+                Exit Do
+            End If
+            record_cat = record_cat & record
+        Loop
+        Debug.Print record_cat
+        record_cat = ""
+        Do
+			Sleep 2
+            Get #COMfile2, , record      'data is read in 1 character at a time
+            If record = Chr(13) Then
+                Exit Do
+            End If
+            record_cat = record_cat & record
+        Loop
+        Debug.Print record_cat
+        record_cat = ""
+    Loop
+    Close #COMfile
+    Close #COMfile2
 End Sub
 
-Sub readNamePort()
-    workingPort = Range("AA1")
-    Dim i As Long
-    numPort = 0
-    For i = 0 To uBoundVar
-        If ports(i) = workingPort Then
-            numPort = i
-        End If
-    Next i
-    If workingPort = "" Then workingPort = ports(0)
-End Sub
-
-'save name of port
-Sub saveNamePort()
-    Range("AA1").Font.Color = vbWhite
-    Range("AA1") = workingPort
-End Sub
-
-
-Sub signalWork()
-    If work Then
-        Range("A32:B32").Interior.Color = RGB(255, 215, 191)
-    Else
-        Range("A32:B32").Interior.Color = xlNone
-    End If
-End Sub
