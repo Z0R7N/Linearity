@@ -1,3 +1,5 @@
+#include <EEPROM.h>
+
 String result = "!";
 String ser;
 int LED = 13;
@@ -9,21 +11,20 @@ void setup() {
 
 void loop() {
 		if (Serial.available() > 0){
-		
+		int cnt = 0;
 		// delay(400);
 		// digitalWrite(LED, 1);
 		// delay(800);
 		// digitalWrite(LED, 0);
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 10){
-		digitalWrite(LED, 1);
-		delay(400);
-		digitalWrite(LED, 0);
-		delay(200);
+		while (int(sr) != 13 && int(sr) != 10 && int(sr) != -1){
+			// Serial.println(int(sr));
+			saveEEPROM(cnt, sr);
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
+			cnt++;
 		}
 	}
 	else {
@@ -64,4 +65,15 @@ void answer(String req) {
 	// Serial.print(" = ");
 	result = expa(x);
 	Serial.println(result);
+}
+
+void saveEEPROM (int adr, char data) {
+	digitalWrite(LED, 1);
+	delay(400);
+	digitalWrite(LED, 0);
+	delay(200);
+	// char red = EEPROM.read(adr);
+	// if(data != red){
+		// EEPROM.write(adr, data);
+	// }
 }
