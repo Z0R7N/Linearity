@@ -24,10 +24,10 @@ void loop() {
 		char sr = Serial.read();
 		while (int(sr) != 13 && int(sr) != 10 && int(sr) != -1){
 			// Serial.println(int(sr));
-			//saveEEPROM(cnt, sr);
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
+			saveEEPROM(cnt, sr);
 			cnt++;
 		}
 	}
@@ -77,9 +77,9 @@ void saveEEPROM (int adr, char data) {
 	delay(200);
 	digitalWrite(LED, 0);
 	delay(50);
-	// char red = EEPROM.read(adr);
-	// if(data != red){
-		// EEPROM.write(adr, data);
-	// }
+	char red = EEPROM.read(adr);
+	if(data != red){
+		EEPROM.write(adr, data);
+	}
 }
 

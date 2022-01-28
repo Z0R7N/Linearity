@@ -12,7 +12,7 @@ void loop() {
 
 void eprormRead(){
 	byte val;
-	for (int i = 0; i < 50; i++){
+	for (int i = 0; i < 14; i++){
 		val = EEPROM.read(i);
 		Serial.print("adres: ");
 		Serial.print(i);
