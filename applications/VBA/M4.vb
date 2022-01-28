@@ -5,7 +5,18 @@ Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 Dim COMDriver As Integer
 Dim COMport2 As Variant
 Dim numPort2 As String
+'Dim baudrate As Long
+
+Dim COMfile As Integer
+Dim COMfile2 As Integer
+Dim COMstring As Variant
+Dim COMstring2 As Variant
+Dim COMPort As String
 Dim baudrate As Long
+Dim record_cat As Variant
+Dim record As String * 1
+Dim cnt As Integer
+Dim ComP2 As String
 
 Sub openPort2()
     numPort2 = Range("A1").Value
@@ -27,18 +38,9 @@ Function sendAngle(num As String) As String
 End Function
 
 Sub ReadCommPC()
-    Dim COMfile As Integer
-    Dim COMfile2 As Integer
-    Dim COMstring As Variant
-    Dim COMstring2 As Variant
-    Dim COMport As String
-    Dim baudrate As Long
-    Dim record_cat As Variant
-    Dim record As String * 1
-    Dim cnt As Integer
-    Dim ComP2 As String
+    
 
-    COMport = Range("A1").Value  'Enter the COM port here.
+    COMPort = Range("A1").Value  'Enter the COM port here.
     ComP2 = "COM9"
     baudrate = 9600       'Enter the baud rate here.
     Dim Cmnd As String
@@ -46,7 +48,7 @@ Sub ReadCommPC()
     'Open COM port with baud rate, no parity, 8 data bits and 1 stop bit
     COMfile = FreeFile
     'COMfile2 = FreeFile(2)
-    COMstring = COMport & ":" & baudrate & ",N,8,1"
+    COMstring = COMPort & ":" & baudrate & ",N,8,1"
     'COMstring2 = COMport & ":" & baudrate & ",N,8,1"
     Close #COMfile
     'Close #COMfile2

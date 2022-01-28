@@ -69,6 +69,10 @@ void answer(String req) {
 	// Serial.print(x);
 	// Serial.print(" = ");
 	result = expa(x);
+	delay(1000);
+	digitalWrite(LED, 1);
+	delay(1000);
+	digitalWrite(LED, 0);
 	Serial.println(result);
 }
 
@@ -77,9 +81,9 @@ void saveEEPROM (int adr, char data) {
 	delay(200);
 	digitalWrite(LED, 0);
 	delay(50);
-	char red = EEPROM.read(adr);
-	if(data != red){
-		EEPROM.write(adr, data);
-	}
+	// char red = EEPROM.read(adr);
+	// if(data != red){
+		// EEPROM.write(adr, data);
+	// }
 }
 

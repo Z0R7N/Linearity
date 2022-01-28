@@ -1,0 +1,8 @@
+<tab id="linearity" label="Линейность">
+	<group id="linear" label="Проверка линейности">
+		<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" />
+	</group>
+	<group id="coil" label="Проверка катушек">
+		<button id="btnCoil" label="Катушка" imageMso="ActiveXRadioButton" onAction="startCoil" />
+	</group>
+</tab>
