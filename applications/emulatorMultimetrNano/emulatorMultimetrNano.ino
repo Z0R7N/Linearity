@@ -27,19 +27,24 @@ void loop() {
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
-			saveEEPROM(cnt, sr);
+			//saveEEPROM(cnt, sr);
 			cnt++;
 		}
 	}
 	else {
 		if (ser != ""){
-			if (ser == "reset23") resetFunc();
-			// Serial.println();
-			// Serial.println("==================");
-			// Serial.println("==================");
-			// Serial.print("serial = ");
-			// Serial.println(ser);
-			answer(ser);
+			if (ser == "reset") resetFunc();
+			else if (ser == "*idn?") {
+				Serial.println("GW, GDM8255A, 1.0");
+			}
+			else{
+				// Serial.println();
+				// Serial.println("==================");
+				// Serial.println("==================");
+				// Serial.print("serial = ");
+				// Serial.println(ser);
+				answer(ser);
+			}
 			ser = "";
 		}
 		//digitalWrite(LED, 0);
@@ -69,10 +74,10 @@ void answer(String req) {
 	// Serial.print(x);
 	// Serial.print(" = ");
 	result = expa(x);
-	delay(1000);
-	digitalWrite(LED, 1);
-	delay(1000);
-	digitalWrite(LED, 0);
+	// delay(10);
+	// digitalWrite(LED, 1);
+	// delay(100);
+	// digitalWrite(LED, 0);
 	Serial.println(result);
 }
 

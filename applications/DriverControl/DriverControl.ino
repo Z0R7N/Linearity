@@ -8,6 +8,7 @@ ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
 e - запрос на число энкодера
 hlo - запрос на проверку порта
+reset - перезагрузить устройство
 */
 
 #define en2 2
@@ -33,6 +34,9 @@ bool cw = false;					// clockwise or counterclockwise rotating
 int coefAngl = 800;					// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 
+
+//declare a function reset with address 0
+void(* resetFunc) (void) = 0;
 
 void inter() {
 	if(!cw && digitalRead(DIR) == HIGH) {
@@ -110,6 +114,9 @@ void getCommand(String com){
 	else if (com == "/") {
 		angleSet(mainAngle + 2);
 	}
+	else if (com == "reset") {
+		resetFunc();
+	}
 	else if (com == "hlo") {
 		Serial.println("qpzm10qqf");
 	}
@@ -136,7 +143,7 @@ void getCommand(String com){
 	}
 	else {
 		// instruction();
-		Serial.println("-1");
+		Serial.println("error");
 	}
 }
 
