@@ -1,0 +1,67 @@
+type list
+version 0
+Toolpath\
+Toolpath\стол д5
+Toolpath\стол д5_1
+Toolpath\стол 2 д5
+Toolpath\стол 2 д5 подшипник
+Toolpath\стол 2 д5 основа
+Toolpath\стол центр д4у45
+Toolpath\стол центр д4у45_1
+Toolpath\стол низ д2,5
+Toolpath\стол подшипник чистка д5
+Toolpath\стол основа чистка д51
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Workplane\2
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\1_1
+Boundary\2
+Boundary\3
+Boundary\4
+Boundary\5_1
+Macro\
+Featureset\
+Featureset\1
+NCProgram\
+NCProgram\стол д5
+NCProgram\стол 2 д5
+NCProgram\стол подшипник чистка д5
+NCProgram\стол центр д4у45
+NCProgram\стол низ д2,5
+NCProgram\стол основа чистка д51
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM5x2
+Tool\сверлофреза д2 у45
+Tool\сверлофреза д4у45
+Tool\EM2.5x2
+Tool\EM5x2_для основы
+Tool\EM5x2_для подшипник
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\стол
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\
