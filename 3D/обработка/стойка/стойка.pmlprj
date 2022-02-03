@@ -1,0 +1,9 @@
+6 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+03 фев 2022 07.30.12
+x03f7828061fb576b00008b4800000000.pmlent pmlEntModel 'стойка прижима держатель'
+x224349d061fb577100008d8700000000.pmlent pmlEntLevel 'Config-0-Partition'
+x416bc3a061fb57ee00010d5b00000000.pmlent pmlEntTool 'EM5x2'
+x1f1e88b061fb585b000233da00000000.pmlent pmlEntWorkplane '1'
+x4153ea4061fb58750002c26d00000000.pmlent pmlEntToolpath 'стойка 001 д5'
+x4a29cbe061fb59200004199f00000000.pmlent pmlEntNCProgram 'стойка 001 д5'

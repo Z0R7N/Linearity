@@ -1,0 +1,24 @@
+type list
+version 0
+Toolpath\
+Toolpath\стойка 001 д5
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+NCProgram\стойка 001 д5
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM5x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\стойка прижима держатель
