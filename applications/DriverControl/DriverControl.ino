@@ -118,7 +118,7 @@ void getCommand(String com){
 		resetFunc();
 	}
 	else if (com == "hlo") {
-		Serial.println("qpzm10qqf");
+		Serial.println("250");
 	}
 	else if (com == "e") {
 		Serial.println(encdr);
