@@ -1,5 +1,5 @@
 4 1 # Active Entities (DO NOT EDIT!)
-4549800061fa5cba0002219b00000000 pmlEntTool 'EM5x2_для подшипник'
-1f5b809061fa052a000147fa00000000 pmlEntWorkplane '1'
 4745147061fa05bc0003344900000000 pmlEntFeature '1'
-4438c97061fa20060023d14a00000000 pmlEntToolpath 'стол подшипник чистка д5'
+42a72fd061fa45320002c6db00000000 pmlEntWorkplane '2'
+44c4e74061fa456b00040cd000000000 pmlEntTool 'EM2.5x2'
+1f27204061fa457c0004b8bc00000000 pmlEntToolpath 'стол низ д2,5'

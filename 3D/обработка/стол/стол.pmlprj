@@ -1,6 +1,6 @@
-33 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+34 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
 0 2
-02 фев 2022 13.46.43
+02 фев 2022 15.01.31
 x412eaa6061fa0508000091e500000000.pmlent pmlEntLevel 'Config-0-Partition'
 x1f5b809061fa052a000147fa00000000.pmlent pmlEntWorkplane '1'
 x4204fa8061fa058d00027bee00000000.pmlent pmlEntTool 'EM5x2'
@@ -26,6 +26,7 @@ x1f27204061fa457c0004b8bc00000000.pmlent pmlEntToolpath 'стол низ д2,5'
 x42f4667061fa4fa2000570ae00000000.pmlent pmlEntToolpath 'стол основа чистка д51'
 x4c61747061fa4fbb000600fa00000000.pmlent pmlEntBoundary '5_1'
 x4c722ac061fa518200097a8d00000000.pmlent pmlEntTool 'EM5x2_для основы'
+x4549800061fa5cba0002219b00000000.pmlent pmlEntTool 'EM5x2_для подшипник'
 x47296bf061fa06ca0006317a00000000.pmlent pmlEntNCProgram 'стол д5'
 x4421483061fa147c000a7f5000000000.pmlent pmlEntNCProgram 'стол 2 д5'
 x57174b5061fa201c002457c300000000.pmlent pmlEntNCProgram 'стол подшипник чистка д5'
@@ -33,4 +34,4 @@ x1f23613061fa21c20029282700000000.pmlent pmlEntNCProgram 'стол центр д4у45'
 x4cdcd58061fa467400071e0a00000000.pmlent pmlEntNCProgram 'стол низ д2,5'
 x47b89a6061fa51b4000a7b5000000000.pmlent pmlEntNCProgram 'стол основа чистка д51'
 x412f328061fa04ff00008c5e00000000.pmlent pmlEntModel 'стол'
-x4549800061fa5cba0002219b00000000.pmlent pmlEntTool 'EM5x2_для подшипник'
+x446bb6c061fa72560003287400000000.pmlent pmlEntLevel 'New components from reimported model стол'
