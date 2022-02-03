@@ -15,5 +15,5 @@ Dim checkMultimetr As Boolean       ' if port of multimetr is correct
 Dim sendMulty As String
 Public cellPort1, cellPort2 As String   ' keeping data serials (in sub setParameter)
 Dim cellLog As Long                  ' cells for loging
-Dim needLog As Boolean 
+Dim needLog As Boolean               ' if log is need - true
 
