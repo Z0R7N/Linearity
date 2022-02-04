@@ -1,0 +1,56 @@
+type list
+version 0
+Toolpath\
+Toolpath\основание верх д5
+Toolpath\основание верх д5_1
+Toolpath\основание верх угол д5
+Toolpath\основание верх угол чистка д5
+Toolpath\основание верх 2 д5
+Toolpath\основание  2 д5
+Toolpath\основание низ д5
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Workplane\2
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\2
+Boundary\3
+Boundary\3_1
+Boundary\4
+Boundary\4_1
+Boundary\5
+Macro\
+Featureset\
+NCProgram\
+NCProgram\основание верх д5
+NCProgram\основание верх 2 д5
+NCProgram\основание низ д5
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM5x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\стойка прижима основа
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\
