@@ -106,15 +106,18 @@ void getCommand(String com){
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
 		cw = true;
+		Serial.println(com);
 	}
 	else if (com == "-") {
 		digitalWrite(DIR, LOW);
 		cw = false;
+		Serial.println(com);
 	}
 	else if (com == "/") {
 		angleSet(mainAngle + 2);
 	}
 	else if (com == "reset") {
+		Serial.println(com);
 		resetFunc();
 	}
 	else if (com == "hlo") {
@@ -294,6 +297,7 @@ void loop() {
 			// Serial.println(ser);
 			getCommand(ser);
 			ser = "";
+			Serial.flush();
 		}
 	}
 }

@@ -37,6 +37,14 @@ void loop() {
 			else if (ser == "*idn?") {
 				Serial.println("GW, GDM8255A, 1.0");
 			}
+			else if (ser == "conf:stat:rang?") {
+				if (millis() % 2 == 0){
+					Serial.println("DCV: 1");
+				}
+				else {
+					Serial.println("DCV: 2");
+				}
+			}
 			else{
 				// Serial.println();
 				// Serial.println("==================");
@@ -46,6 +54,7 @@ void loop() {
 				answer(ser);
 			}
 			ser = "";
+			Serial.flush();
 		}
 		//digitalWrite(LED, 0);
 		//delay(500);
