@@ -1,6 +1,6 @@
 22 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
 0 2
-04 фев 2022 12.34.50
+07 фев 2022 09.46.58
 x22bfd61061fcab530000324f00000000.pmlent pmlEntLevel 'Config-0-Partition'
 x223ea11061fcab940001649800000000.pmlent pmlEntWorkplane '1'
 x22f01eb061fcac7e0003ef9100000000.pmlent pmlEntTool 'EM5x2'
@@ -12,14 +12,14 @@ x1f83e4d061fcc80100014c6900000000.pmlent pmlEntBoundary '3'
 x436ef5c061fcc81200017d5000000000.pmlent pmlEntToolpath 'основание верх угол д5'
 x470b9e5061fcc9d00005616e00000000.pmlent pmlEntToolpath 'основание верх угол чистка д5'
 x4d1b218061fcca2e0005ca4e00000000.pmlent pmlEntBoundary '3_1'
-x4a12b53061fcb44c00096fbf00000000.pmlent pmlEntNCProgram 'основание верх д5'
-x223e9bb061fcab4c00002eb700000000.pmlent pmlEntModel 'стойка прижима основа'
 x66d3a03061fcefdb0001a4ea00000000.pmlent pmlEntBoundary '4'
 x69f4423061fcf01900028c9c00000000.pmlent pmlEntToolpath 'основание верх 2 д5'
-x6bbb211061fcf0320002d4f700000000.pmlent pmlEntNCProgram 'основание верх 2 д5'
 x69afeda061fcf0c00003fbf400000000.pmlent pmlEntToolpath 'основание  2 д5'
 x66ec537061fcf0ea0004570e00000000.pmlent pmlEntBoundary '4_1'
 x6bc6f78061fcf1a10006805a00000000.pmlent pmlEntWorkplane '2'
 x5a4b102061fcf26a000797e300000000.pmlent pmlEntToolpath 'основание низ д5'
 x69a5eed061fcf2a00008024e00000000.pmlent pmlEntBoundary '5'
+x4a12b53061fcb44c00096fbf00000000.pmlent pmlEntNCProgram 'основание верх д5'
+x6bbb211061fcf0320002d4f700000000.pmlent pmlEntNCProgram 'основание верх 2 д5'
 x66c2299061fcf325000a19f500000000.pmlent pmlEntNCProgram 'основание низ д5'
+x223e9bb061fcab4c00002eb700000000.pmlent pmlEntModel 'стойка прижима основа'
