@@ -91,7 +91,6 @@ void stepSM(){
 
 // recognising commands got from port
 void getCommand(String com){
-	com.trim();
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
@@ -120,11 +119,14 @@ void getCommand(String com){
 	else if (com == "reset") {
 		resetFunc();
 	}
+	else if (com == "dir") {
+		Serial.println(digitalRead(DIR) ? "+" : "-");
+	}
 	else if (com == "hlo") {
 		Serial.println("250");
 	}
 	else if (com == "e") {
-		Serial.println(encdr);
+		Serial.println(round(encdr / enCoeff));
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
