@@ -15,7 +15,7 @@ void setup() {
 
 void loop() {
 		if (Serial.available() > 0){
-		int cnt = 0;
+		//int cnt = 0;
 		// delay(400);
 		// digitalWrite(LED, 1);
 		// delay(800);
@@ -28,7 +28,7 @@ void loop() {
 			delay(5);
 			sr = Serial.read();
 			//saveEEPROM(cnt, sr);
-			cnt++;
+			//cnt++;
 		}
 	}
 	else {
@@ -54,7 +54,7 @@ void loop() {
 				answer(ser);
 			}
 			ser = "";
-			Serial.flush();
+			//Serial.flush();
 		}
 		//digitalWrite(LED, 0);
 		//delay(500);

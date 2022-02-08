@@ -91,6 +91,7 @@ void stepSM(){
 
 // recognising commands got from port
 void getCommand(String com){
+	com.trim();
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
@@ -117,7 +118,6 @@ void getCommand(String com){
 		angleSet(mainAngle + 2);
 	}
 	else if (com == "reset") {
-		Serial.println(com);
 		resetFunc();
 	}
 	else if (com == "hlo") {
@@ -282,7 +282,7 @@ void loop() {
 	if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 13 && int(sr) != 10){
+		while (int(sr) != 13 && int(sr) != 10){// && int(sr) != -1){
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
@@ -295,9 +295,10 @@ void loop() {
 			// Serial.println("==================");
 			// Serial.print("serial = ");
 			// Serial.println(ser);
+			ser.trim();
 			getCommand(ser);
 			ser = "";
-			Serial.flush();
+			//Serial.flush();
 		}
 	}
 }
