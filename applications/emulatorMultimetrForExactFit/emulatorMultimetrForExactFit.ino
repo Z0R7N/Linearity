@@ -96,14 +96,20 @@ void answer(String req) {
 	Serial.println(result);
 }
 
-long randTime(){
-	long tt = 0;
+int randTime(){
+	int tt = 0;
+	String tmp;
+	String res = "";
 	long tm = millis();
 	Serial.println(tm);
-	
-	Serial.println(tm);
-	Serial.println(tm);
-	Serial.println(tm);
+	tmp = String(tm);
+	Serial.println(tmp);
+	for (int i = tmp.length() - 1; i < tmp.length() - 4; i--){
+		res += tmp[i];
+	}
+	Serial.println(res);
+	tt = res.toInt();
+	Serial.println(tt);
 	
 	return tt;
 }
