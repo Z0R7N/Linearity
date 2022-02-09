@@ -3,13 +3,13 @@
 String result = "!";
 String ser;
 int LED = 13;
+int counter = 0;
 
 
 //declare a function reset with address 0
 void(* resetFunc) (void) = 0;
 
 void setup() {
-	pinMode(LED, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -17,13 +17,10 @@ void loop() {
 		if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 13 && int(sr) != 10 && int(sr) != -1){
-			// Serial.println(int(sr));
+		while (int(sr) != 13 && int(sr) != 10){// && int(sr) != -1){
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
-			//saveEEPROM(cnt, sr);
-			//cnt++;
 		}
 	}
 	else {
@@ -46,48 +43,67 @@ void loop() {
 			ser = "";
 			//Serial.flush();
 		}
-		//digitalWrite(LED, 0);
-		//delay(500);
 	}
 }
 	
 	
-String expa (long num) {
+String expa (double num) {
 	String s = "";
 	String result = "";
-	char cstr[16];
-	ltoa(num, cstr, 10);
-	s = cstr;
+	char TempString[10];
+	dtostrf(num,2,2,TempString);
+ // dtostrf( [doubleVar] , [sizeBeforePoint] , [sizeAfterPoint] , [WhereToStoreIt] )
+	s = String(TempString);
+	Serial.print("num = ");
+	Serial.print(num);
+	Serial.print("  s = ");
+	Serial.println(s);
+	String cn = String(counter);
 	int cnt = s.length();
-	result = "0.";
-	result += s;
+	//result = "0.";
+	result = s;
+	result += cn;
 	result += "E";
 	result += (cnt - 4);
-	
+	counter++;
 	return result;
 }
 
 void answer(String req) {
-	long x = random(1000, 100100);
-	 // Serial.println(x);
-	// Serial.print(x);
-	// Serial.print(" = ");
+	double x;
+	switch (counter){
+		case 0:
+			for (int i = 0; i < 20; i++){
+				x = random(5000, 5800);
+				x /= 100;
+			}
+			break;
+		case 1:
+			x = random(3000, 4000);
+			x /= 1000;
+			break;
+		case 10:
+			x = 2.5;
+			break;
+		default:
+			x = random(0, 3000);
+			x /= 1000;
+			break;
+	}
+	Serial.println(x);
 	result = expa(x);
-	// delay(10);
-	// digitalWrite(LED, 1);
-	// delay(100);
-	// digitalWrite(LED, 0);
+	Serial.print("result = ");
 	Serial.println(result);
 }
 
-void saveEEPROM (int adr, char data) {
-	digitalWrite(LED, 1);
-	delay(200);
-	digitalWrite(LED, 0);
-	delay(50);
-	// char red = EEPROM.read(adr);
-	// if(data != red){
-		// EEPROM.write(adr, data);
-	// }
+long randTime(){
+	long tt = 0;
+	long tm = millis();
+	Serial.println(tm);
+	
+	Serial.println(tm);
+	Serial.println(tm);
+	Serial.println(tm);
+	
+	return tt;
 }
-
