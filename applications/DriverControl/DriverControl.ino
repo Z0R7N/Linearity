@@ -123,7 +123,7 @@ void getCommand(String com){
 		Serial.println(digitalRead(DIR) ? "+" : "-");
 	}
 	else if (com == "hlo") {
-		Serial.println("250");
+		Serial.println("hlo");
 	}
 	else if (com == "e") {
 		Serial.println(round(encdr / enCoeff));
