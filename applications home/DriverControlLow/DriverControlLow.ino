@@ -18,20 +18,20 @@ reset - перезагрузить устройство
 #define DIR 6 // direction for driver
 #define ENA 4 // enable
 
-int maxPs = 1000;
-int minPs = 80;
+int maxPs = 5000;
+int minPs = 800; //80;
 
 String ser = "";					// string from serial
 long mainAngle = 0;					// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
 int acc = 5;						// acceleration motor speed
-int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
+int ps = 1000;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
-double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
+double angleStep = 142.2222222222 / 16;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = false;					// clockwise or counterclockwise rotating
-int coefAngl = 800;					// coefficient for pre angle
+int coefAngl = 50;//800;					// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 
 
@@ -91,6 +91,8 @@ void stepSM(){
 
 // recognising commands got from port
 void getCommand(String com){
+	com.replace("(\r\n)","");
+	// Serial.println(com);
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
@@ -162,10 +164,10 @@ void angleSet(double a){
 	// Serial.print("        ");
 	// Serial.println(newAngl);
 	if (preAngl < mainAngle) {
-		int tmpAcc = acc;
-		acc = 1;
+		//int tmpAcc = acc;
+		//acc = 1;
 		setParam();
-		acc = tmpAcc;
+		//acc = tmpAcc;
 	}
 	newAngl = preAngl;
 	setParam();
@@ -284,20 +286,16 @@ void loop() {
 	if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 10){// && int(sr) != -1 && int(sr) != 13){
+		// Serial.println(int(sr));
+		while (int(sr) != 10 && int(sr) != 13){// && int(sr) != -1){
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
+			// Serial.println(int(sr));
 		}
 	}
 	else {
 		if (ser != ""){
-			// Serial.println();
-			// Serial.println("==================");
-			// Serial.println("==================");
-			// Serial.print("serial = ");
-			// Serial.println(ser);
-			ser.trim();
 			getCommand(ser);
 			ser = "";
 			//Serial.flush();

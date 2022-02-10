@@ -17,7 +17,7 @@ void loop() {
 		if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 13 && int(sr) != 10 && int(sr) != -1){
+		while (int(sr) != 10 && int(sr) != 13){// && int(sr) != -1){
 			// Serial.println(int(sr));
 			ser += sr;
 			delay(5);
