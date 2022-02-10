@@ -26,9 +26,9 @@ long mainAngle = 0;					// countong for angle of position steper motor (from 0 t
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
 int acc = 5;						// acceleration motor speed
-int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
+int ps = 1000;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
-double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
+double angleStep = 142.2222222222 / 16;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = false;					// clockwise or counterclockwise rotating
 int coefAngl = 800;					// coefficient for pre angle
