@@ -54,45 +54,46 @@ String expa (double num) {
 	dtostrf(num,2,2,TempString);
  // dtostrf( [doubleVar] , [sizeBeforePoint] , [sizeAfterPoint] , [WhereToStoreIt] )
 	s = String(TempString);
-	Serial.print("num = ");
-	Serial.print(num);
-	Serial.print("  s = ");
-	Serial.println(s);
+	// Serial.print("num = ");
+	// Serial.print(num);
+	// Serial.print("  s = ");
+	// Serial.println(s);
 	String cn = String(counter);
 	int cnt = s.length();
 	//result = "0.";
 	result = s;
 	result += cn;
 	result += "E";
-	result += (cnt - 4);
+	result += (cnt - 3);
 	counter++;
 	return result;
 }
 
 void answer(String req) {
 	double x;
+	int j = randTime();
 	switch (counter){
 		case 0:
-			for (int i = 0; i < 20; i++){
+			for (int i = 0; i < j; i++){
 				x = random(5000, 5800);
-				x /= 100;
+				x /= 1000;
 			}
 			break;
 		case 1:
 			x = random(3000, 4000);
-			x /= 1000;
+			x /= 10000;
 			break;
 		case 10:
 			x = 2.5;
 			break;
 		default:
 			x = random(0, 3000);
-			x /= 1000;
+			x /= 10000;
 			break;
 	}
-	Serial.println(x);
+	// Serial.println(x);
 	result = expa(x);
-	Serial.print("result = ");
+	// Serial.print("result = ");
 	Serial.println(result);
 }
 
@@ -101,15 +102,22 @@ int randTime(){
 	String tmp;
 	String res = "";
 	long tm = millis();
-	Serial.println(tm);
+	// Serial.print("tm = ");
+	// Serial.println(tm);
 	tmp = String(tm);
-	Serial.println(tmp);
-	for (int i = tmp.length() - 1; i < tmp.length() - 4; i--){
+	// Serial.print("tm.length = ");
+	// Serial.println(tmp.length());
+	for (int i = tmp.length() - 1; i > tmp.length() - 3; i--){
 		res += tmp[i];
+		// Serial.print("i = ");
+		// Serial.println(i);
+		// Serial.println(tmp[i]);
 	}
-	Serial.println(res);
+	// Serial.print("res = ");
+	// Serial.println(res);
 	tt = res.toInt();
-	Serial.println(tt);
+	// Serial.print("tt = ");
+	// Serial.println(tt);
 	
 	return tt;
 }
