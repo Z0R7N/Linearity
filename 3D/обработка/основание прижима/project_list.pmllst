@@ -8,6 +8,7 @@ Toolpath\основание верх угол чистка д5
 Toolpath\основание верх 2 д5
 Toolpath\основание  2 д5
 Toolpath\основание низ д5
+Toolpath\основание низ д5_1
 Group\
 Pattern\
 Workplane\
@@ -23,6 +24,7 @@ Boundary\3_1
 Boundary\4
 Boundary\4_1
 Boundary\5
+Boundary\5_1
 Macro\
 Featureset\
 NCProgram\
