@@ -1,8 +1,5 @@
-#include <EEPROM.h>
-
 String result = "!";
 String ser;
-int LED = 13;
 
 
 //declare a function reset with address 0
@@ -46,8 +43,6 @@ void loop() {
 			ser = "";
 			//Serial.flush();
 		}
-		//digitalWrite(LED, 0);
-		//delay(500);
 	}
 }
 	
@@ -69,25 +64,6 @@ String expa (long num) {
 
 void answer(String req) {
 	long x = random(1000, 100100);
-	 // Serial.println(x);
-	// Serial.print(x);
-	// Serial.print(" = ");
 	result = expa(x);
-	// delay(10);
-	// digitalWrite(LED, 1);
-	// delay(100);
-	// digitalWrite(LED, 0);
 	Serial.println(result);
 }
-
-void saveEEPROM (int adr, char data) {
-	digitalWrite(LED, 1);
-	delay(200);
-	digitalWrite(LED, 0);
-	delay(50);
-	// char red = EEPROM.read(adr);
-	// if(data != red){
-		// EEPROM.write(adr, data);
-	// }
-}
-
