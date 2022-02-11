@@ -1,9 +1,8 @@
-#include <EEPROM.h>
-
-String result = "!";
 String ser;
 int LED = 13;
 int counter = 0;
+bool check1 = false;
+bool check2 = false;
 
 
 //declare a function reset with address 0
@@ -17,7 +16,7 @@ void loop() {
 		if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 10){// && int(sr) != -1 && int(sr) != 13){
+		while (int(sr) != 10){// && int(sr) != -1){  int(sr) != 13 && 
 			ser += sr;
 			delay(5);
 			sr = Serial.read();
@@ -49,7 +48,7 @@ void loop() {
 	
 String expa (double num) {
 	String s = "";
-	String result = "";
+	String result1 = "";
 	char TempString[10];
 	dtostrf(num,2,2,TempString);
  // dtostrf( [doubleVar] , [sizeBeforePoint] , [sizeAfterPoint] , [WhereToStoreIt] )
@@ -60,41 +59,60 @@ String expa (double num) {
 	// Serial.println(s);
 	String cn = String(counter);
 	int cnt = s.length();
-	//result = "0.";
-	result = s;
-	result += cn;
-	result += "E";
-	result += (cnt - 3);
+	//result1 = "0.";
+	result1 = s;
+	result1 += cn;
+	result1 += "E";
+	result1 += (cnt - 3);
 	counter++;
-	return result;
+	return result1;
 }
 
 void answer(String req) {
 	double x;
+	String result;
 	int j = randTime();
 	switch (counter){
 		case 0:
 			for (int i = 0; i < j; i++){
 				x = random(5000, 5800);
-				x /= 1000;
+				x /= 10000;
 			}
 			break;
 		case 1:
 			x = random(3000, 4000);
-			x /= 10000;
+			x /= 100000;
+			check1 = true;
 			break;
 		case 10:
 			x = 2.5;
 			break;
 		default:
-			x = random(0, 3000);
-			x /= 10000;
+			double lim = 0.1;
+			do {
+				x = random(0, 3000);
+				x /= 100000;
+				if (check1){
+					lim = 0.15;
+					check2 = true;
+				}
+				if (check2) {
+					lim = 0.24;
+				}
+			}while (x > lim);
 			break;
 	}
-	// Serial.println(x);
+	//Serial.println();
 	result = expa(x);
 	// Serial.print("result = ");
+	// for (int i = 0; i < result.length(); i++){
+		// Serial.print(result[i]);
+		// Serial.print(" - ");
+		// Serial.print(int(result[i]));
+		// Serial.println();
+	// }
 	Serial.println(result);
+	Serial.flush();
 }
 
 int randTime(){
