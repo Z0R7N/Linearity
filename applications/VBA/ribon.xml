@@ -1,8 +1,15 @@
 <tab id="linearity" label="Линейность">
-	<group id="linear" label="Проверка линейности">
-		<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" />
-	</group>
-	<group id="coil" label="Проверка катушек">
-		<button id="btnCoil" label="Катушка" imageMso="ActiveXRadioButton" onAction="startCoil" />
-	</group>
-</tab>
+				<group id="linear" label="Проверка линейности">
+					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" />
+					<button id="btnCancelLinear" label="Отмена" imageMso="CancelRequest" onAction="stopWork" size="large" />
+				</group>
+				<group id="checkAngle" label="Один угол">
+					<button id="oneAngle" label="Проверить угол" imageMso="ArrowsMore" onAction="angleCheck" size="large" />
+				</group>
+				<group id="manual" label="Ручное управление">
+					<button id="btnSpeedInc" label="Увеличить угол" imageMso="ActiveXRadioButton" onAction="IncreaceAngle" size="large" />
+					<button id="btnSpeedDec" label="Уменьшить угол" imageMso="ActiveXRadioButton" onAction="DecreaceAngle" size="large" />
+					<button id="rotateCCW" label="Вперед" imageMso="ActiveXRadioButton" onAction="rtCCW" size="large" />
+					<button id="rotateCW" label="Назад" imageMso="ActiveXRadioButton" onAction="rtCW" size="large" />
+				</group>
+			</tab>
