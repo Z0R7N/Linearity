@@ -102,16 +102,19 @@ void getCommand(String com){
 		mainAngle = 0;
 		encdr = 0;
 		Serial.println("0");
+		Serial.flush();
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
 		cw = true;
 		Serial.println(com);
+		Serial.flush();
 	}
 	else if (com == "-") {
 		digitalWrite(DIR, LOW);
 		cw = false;
 		Serial.println(com);
+		Serial.flush();
 	}
 	else if (com == "/") {
 		angleSet(mainAngle + 1);
@@ -121,12 +124,15 @@ void getCommand(String com){
 	}
 	else if (com == "dir") {
 		Serial.println(digitalRead(DIR) ? "+" : "-");
+		Serial.flush();
 	}
 	else if (com == "hlo") {
 		Serial.println("hlo");
+		Serial.flush();
 	}
 	else if (com == "e") {
 		Serial.println(mainAngle / angleStep);
+		Serial.flush();
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
@@ -276,6 +282,7 @@ void setup() {
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
   Serial.begin(9600);
+  //Serial.println("hlo");
   attachInterrupt (0, inter, CHANGE);
   attachInterrupt (1, inter, CHANGE);
 }
