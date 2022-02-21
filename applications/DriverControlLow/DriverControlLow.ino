@@ -104,16 +104,19 @@ void getCommand(String com){
 		mainAngle = 0;
 		encdr = 0;
 		Serial.println("0");
+		Serial.flush();
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
 		cw = true;
 		Serial.println(com);
+		Serial.flush();
 	}
 	else if (com == "-") {
 		digitalWrite(DIR, LOW);
 		cw = false;
 		Serial.println(com);
+		Serial.flush();
 	}
 	else if (com == "/") {
 		angleSet(mainAngle + 2);
@@ -123,12 +126,15 @@ void getCommand(String com){
 	}
 	else if (com == "dir") {
 		Serial.println(digitalRead(DIR) ? "+" : "-");
+		Serial.flush();
 	}
 	else if (com == "hlo") {
 		Serial.println("hlo");
+		Serial.flush();
 	}
 	else if (com == "e") {
 		Serial.println(round(encdr / enCoeff));
+		Serial.flush();
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
@@ -136,11 +142,13 @@ void getCommand(String com){
 		ps = speedMotor(spd);
 		// Serial.print("ps ");
 		Serial.println(ps);
+		Serial.flush();
 	}
 	else if (st == "sa") {
 		String accel = com.substring(2);
 		acc = accelerationMotor(accel);
 		Serial.println(acc);
+		Serial.flush();
 	}
 	else if (num > 0) {
 		angleSet(num);
@@ -151,6 +159,7 @@ void getCommand(String com){
 	else {
 		// instruction();
 		Serial.println("error");
+		Serial.flush();
 	}
 }
 

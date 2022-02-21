@@ -140,11 +140,13 @@ void getCommand(String com){
 		ps = speedMotor(spd);
 		// Serial.print("ps ");
 		Serial.println(ps);
+		Serial.flush();
 	}
 	else if (st == "sa") {
 		String accel = com.substring(2);
 		acc = accelerationMotor(accel);
 		Serial.println(acc);
+		Serial.flush();
 	}
 	else if (num > 0) {
 		angleSet(num);
@@ -155,6 +157,7 @@ void getCommand(String com){
 	else {
 		// instruction();
 		Serial.println("error");
+		Serial.flush();
 	}
 }
 
