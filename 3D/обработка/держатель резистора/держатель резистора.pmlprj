@@ -1,0 +1,12 @@
+9 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+24 фев 2022 11.25.08
+x22ad2fc06217342500002eae00000000.pmlent pmlEntModel 'держатель резистора'
+x1f28d8a0621734350000312900000000.pmlent pmlEntLevel 'Config-0-Partition'
+x233ad54062173a38000090be00000000.pmlent pmlEntTool 'EM 4x2'
+x230d60a062173c8a00013b1900000000.pmlent pmlEntWorkplane '1'
+x230affc062173cfa00022fd500000000.pmlent pmlEntBoundary '1'
+x43cc5a4062173d1500029d6400000000.pmlent pmlEntToolpath 'держатель д4'
+x4480088062173d380002c88100000000.pmlent pmlEntNCProgram 'держатель д4'
+x46825e106217406d0003b88800000000.pmlent pmlEntToolpath 'держатель д4_1'
+x46a62b406217406d0003c2f200000000.pmlent pmlEntBoundary '1_1'

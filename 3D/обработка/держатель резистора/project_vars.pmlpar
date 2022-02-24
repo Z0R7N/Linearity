@@ -1,0 +1,39 @@
+{
+	"type" : "Project",
+	"time" : "1645691108",
+	"version" : "0"
+}
+{
+	"Programmer" "S" "Name of programmer that created this project." "232f3550621734f30000398300000000" : "3",
+	"Customer" "S" "Name of customer that this project refers to." "232f5e70621734f30000398500000000" : "",
+	"TextBlocks" "M" "A place holder for text objects." "232f5f30621734f30000398700000000" : {
+	},
+	"HoleTagCatalog" "S" "Last used catalog for this project." "232f5f90621734f30000398900000000" : "",
+	"FusionProductionJob" : {
+		"Name" : "${project_pathname(1)}",
+		"Instructions" : "${Project.Notes}",
+		"Tags" : (
+		),
+		"TaskList" : (
+		)
+	},
+	"A360" "M" "A360 settings for this PowerMill project." : {
+		"Hub" "S" "A360 Hub ID" : "",
+		"Folder" "S" "A360 Folder ID" : "",
+		"Project" "S" "A360 Project ID" : ""
+	},
+	"ThicknessSets" "M" "A place holder for thickness sets." "232f5ff0621734f30000398f00000000" : {
+	},
+	"PartName" "S" "Part name for this project." "232f5bf0621734f30000399100000000" : "",
+	"ProjectHistory" "LM" "project history." "232f6590621734f30000399300000000" : (
+		{
+			"ClientName" "S" "Client product name." "232f6490621734f30000399500000000" : "PowerMill",
+			"ClientVersion" "S" "Client product version." "232f64d0621734f30000399700000000" : "2021000",
+			"DmkCodebase" "S" "Delcam libraries codebase number." "232f62b0621734f30000399900000000" : "2021009"
+		}
+	),
+	"Tolerances" "M" "A place holder for tolerance values." "232f62f0621734f30000399b00000000" : {
+	},
+	"OrderNumber" "S" "Order number for this project." "232f67f0621734f30000399d00000000" : "",
+	"Notes" "S" "Notes for this project." "232f6bd0621734f30000399f00000000" : ""
+}
