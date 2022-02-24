@@ -1,4 +1,4 @@
-#define RES A1
+#define RES A0
 
 String ser;
 // int RES = 1;

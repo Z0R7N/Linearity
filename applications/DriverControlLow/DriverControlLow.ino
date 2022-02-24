@@ -267,7 +267,7 @@ void move() {
 	// Serial.print("steps to move = ");
 	// Serial.println(n);
 	for (int i = 0; i < n; i++) {
-		if(digitalRead(stp)) {
+		if(!digitalRead(stp)) { // <================== button for moving
 			stepSM();
 		}
 	}
