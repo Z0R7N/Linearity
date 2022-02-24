@@ -14,6 +14,8 @@ reset - перезагрузить устройство
 #define en2 2
 #define en3 3
 
+#define stp 8 // button for enable moving
+
 #define PUL 5 // impulse for driver
 #define DIR 6 // direction for driver
 #define ENA 4 // enable
@@ -264,7 +266,9 @@ void move() {
 	// Serial.print("steps to move = ");
 	// Serial.println(n);
 	for (int i = 0; i < n; i++) {
-		stepSM();
+		if(digitalRead(stp)) {
+			stepSM();
+		}
 	}
 	rotate = false;
 	// Serial.print("угол = ");
@@ -280,6 +284,7 @@ void setup() {
   pinMode(ENA, OUTPUT);
   pinMode(en2, INPUT);
   pinMode(en3, INPUT);
+  pinMode(stp, INPUT);
   //digitalWrite(ENA, HIGH);
   digitalWrite(ENA, LOW);
   // digitalWrite(DIR, HIGH);
@@ -294,8 +299,10 @@ void loop() {
 	if (Serial.available() > 0){
 		ser = "";
 		char sr = Serial.read();
-		while (int(sr) != 10){// && int(sr) != -1 && int(sr) != 13){
-			ser += sr;
+		while (int(sr) != -1){// && int(sr) != -1 && int(sr) != 13){
+			if (int(sr) != 10 && int(sr) != 13){
+				ser += sr;
+			}
 			delay(5);
 			sr = Serial.read();
 		}
