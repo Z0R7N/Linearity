@@ -14,7 +14,7 @@ reset - перезагрузить устройство
 #define en2 2
 #define en3 3
 
-#define stp 8 // button for enable moving
+#define stp 7 // button for enable moving
 
 #define PUL 5 // impulse for driver
 #define DIR 6 // direction for driver
