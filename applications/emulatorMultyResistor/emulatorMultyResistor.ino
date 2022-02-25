@@ -60,6 +60,9 @@ void loop() {
 String expa (int num) {
 	String result = "";
 	double r = num / koef;
+	if (r == 0) {
+		r = 0.001;
+	}
 	int cnt = 0;
 	while (r > 1){
 		r /= 10;
