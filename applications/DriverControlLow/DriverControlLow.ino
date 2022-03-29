@@ -174,14 +174,14 @@ void angleSet(double a){
 	// Serial.print(preAngl);
 	// Serial.print("        ");
 	// Serial.println(newAngl);
+	int tmpAcc = acc;
 	if (preAngl < mainAngle) {
-		//int tmpAcc = acc;
-		//acc = 1;
 		setParam();
-		//acc = tmpAcc;
+		acc = 1;
 	}
 	newAngl = preAngl;
 	setParam();
+	acc = tmpAcc;
 	Serial.println(round(encdr / enCoeff));
 }
 

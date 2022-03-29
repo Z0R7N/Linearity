@@ -28,11 +28,11 @@ long mainAngle = 0;					// countong for angle of position steper motor (from 0 t
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
 int acc = 5;						// acceleration motor speed
-int ps = 150;						// delay for pause (80 minimum & 1000 maximum)
+int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
-bool cw = false;					// clockwise or counterclockwise rotating
+bool cw = true;					// clockwise or counterclockwise rotating
 int coefAngl = 800;					// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 
@@ -108,13 +108,13 @@ void getCommand(String com){
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
-		cw = true;
+		cw = false;
 		Serial.println(com);
 		Serial.flush();
 	}
 	else if (com == "-") {
 		digitalWrite(DIR, LOW);
-		cw = false;
+		cw = true;
 		Serial.println(com);
 		Serial.flush();
 	}
@@ -173,14 +173,14 @@ void angleSet(double a){
 	// Serial.print(preAngl);
 	// Serial.print("        ");
 	// Serial.println(newAngl);
+	// int tmpAcc = acc;
 	if (preAngl < mainAngle) {
-		int tmpAcc = acc;
-		acc = 1;
 		setParam();
-		acc = tmpAcc;
+		// acc = 1;
 	}
 	newAngl = preAngl;
 	setParam();
+	// acc = tmpAcc;
 	Serial.println(round(encdr / enCoeff));
 }
 
@@ -264,7 +264,7 @@ void move() {
 	// Serial.println("main  and  new  Angles");
 	// Serial.print(mainAngle);
 	// Serial.print("steps to move = ");
-	// Serial.println(n);
+	//Serial.println(ps);
 	for (int i = 0; i < n; i++) {
 		if(digitalRead(stp)) {
 			stepSM();

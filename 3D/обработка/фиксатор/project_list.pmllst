@@ -4,22 +4,27 @@ Toolpath\
 Toolpath\фиксатор отв д3
 Toolpath\фиксатор профиль отв
 Toolpath\фиксатор профиль
+Toolpath\фиксатор выборка д3
 Group\
 Pattern\
 Workplane\
 Workplane\1
+Workplane\2
 Setup\
 FeatureGroup\
 Boundary\
 Boundary\1
 Boundary\1_1
+Boundary\2
 Macro\
 Featureset\
 Featureset\1
 NCProgram\
 NCProgram\фиксатор д3
+NCProgram\фиксатор выборка д3
 Level\
 Level\Config-0-Partition
+Level\New components from reimported model фиксатор
 Tool\
 Tool\EM3x2
 Process\
@@ -27,3 +32,19 @@ MachineTool\
 StockModel\
 Model\
 Model\фиксатор
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\

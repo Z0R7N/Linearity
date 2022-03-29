@@ -1,14 +1,19 @@
-11 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+16 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
 0 2
-16 мар 2022 13.20.34
-x219c9fd06231b2d60000222600000000.pmlent pmlEntModel 'фиксатор'
+16 мар 2022 14.58.47
 x1e9cc5006231b2e5000024a100000000.pmlent pmlEntLevel 'Config-0-Partition'
 x221f25f06231b34000003d1000000000.pmlent pmlEntTool 'EM3x2'
 x226e68806231b3620000734800000000.pmlent pmlEntWorkplane '1'
 x226f1ee06231b37b0000c48300000000.pmlent pmlEntFeature '1'
 x220211206231b38d0000db2600000000.pmlent pmlEntToolpath 'фиксатор отв д3'
-x458298006231b3a10000f7d400000000.pmlent pmlEntNCProgram 'фиксатор д3'
 x44f559306231b6d1000295eb00000000.pmlent pmlEntBoundary '1'
 x4575c7906231b6e40002fa4500000000.pmlent pmlEntToolpath 'фиксатор профиль отв'
 x48fda2306231b97f0004cbcc00000000.pmlent pmlEntToolpath 'фиксатор профиль'
 x44f513506231b9800004d7e500000000.pmlent pmlEntBoundary '1_1'
+x458298006231b3a10000f7d400000000.pmlent pmlEntNCProgram 'фиксатор д3'
+x219c9fd06231b2d60000222600000000.pmlent pmlEntModel 'фиксатор'
+x427eaf406231cfc800006f1d00000000.pmlent pmlEntLevel 'New components from reimported model фиксатор'
+x446e6c306231d04d00017f5800000000.pmlent pmlEntToolpath 'фиксатор выборка д3'
+x22de35c06231d07c0001d4cc00000000.pmlent pmlEntWorkplane '2'
+x22de09c06231d0830001dd0600000000.pmlent pmlEntBoundary '2'
+x47beab806231d0e80002bcd500000000.pmlent pmlEntNCProgram 'фиксатор выборка д3'
