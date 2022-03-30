@@ -208,32 +208,11 @@ Sub driverZero()
 End Sub
 
 ' control bounderies for rotate
-Function bound(ang As Double, dir As String) As Double
-    Dim tmpVlt As Double
-    Dim curAng As Double
-    Dim difAng As Double
-    Dim targetAng As Double
-    Dim overAng As Double
-    Dim limit As Double
-    tmpVlt = getTension
-    curAng = calculateAngle(tmpVlt)
-    If dir = "+" Then
-        difAng = ang - mainAngle
-    Else
-        difAng = mainAngle - ang
-    End If
-    targetAng = curAng - difAng
-    If xMinusPlusY(targetAng, 250) > 0 Then
-        limit = 250
-    
-    ElseIf xMinusPlusY(targetAng, -10) < 0 Then
-        limit = -10
-    Else
-        bound = ang
-    End If
-'    overAng = limit - targetAng
-'    bound = ang - overAng
-'    if xMinusPlusY(bound) <= 0 then bound = mainAngle
+Function bound(ang As Double, dir As String) As boolean
+	bound = true
+	if dir = "-" then
+		
+	end if
 End Function
 
 ' rotate to angle
@@ -244,7 +223,11 @@ Sub rotate(ang As Double, Optional ByVal dir As String = "-")
         Dim newEnc As Double
         tmpEnc = Val(linkPort("e", 2))
         oldTens = tension
-        If manualAng Then ang = bound(ang, dir)
+        if not bound(ang, dir) then 
+			stopBtn = True
+			MsgBox("При дальнейшем вращении прибор будет сломан")
+			exit sub
+		end if
         Dim tmp As String
         tmp = linkPort(dir, 2)
         newEnc = Val(linkPort(CStr(ang), 2))
