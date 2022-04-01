@@ -9,6 +9,7 @@ Public tension As Double
 Public setZero As Boolean
 Dim accurate As Boolean         ' if main angle is not mach to encoder angle
 'Dim countTry As Long            ' for counting try of exact fit angle
+dim protoAbs as double			' angle for absAngle
 Public oldTens As Double           ' for check mounting device
 
 Sub startCheckLine()
@@ -210,8 +211,15 @@ End Sub
 ' control bounderies for rotate
 Function bound(ang As Double, dir As String) As boolean
 	bound = true
+	dim diff as double
 	if dir = "-" then
-		
+		diff = ang - mainAngle
+	Else 
+		diff = mainAngle - ang
+	end if
+	protoAbs = absAngle + diff
+	if xMinusPlusY(protoAbs, 40) < 0 or xMinusPlusY(protoAbs, 320) > 0 then
+		bound = false
 	end if
 End Function
 
@@ -235,13 +243,15 @@ Sub rotate(ang As Double, Optional ByVal dir As String = "-")
         If (xMinusPlusY(tmpVolt, oldTens) = 0 Or xMinusPlusY(tmpEnc, newEnc) = 0) And xMinusPlusY(Abs(mainAngle - ang), 1) > 0 And Not stopBtn Then
             Dim ans As Integer
             ans = MsgBox("Прибор не вращается. Прервать замер?", vbQuestion + vbYesNo + vbDefaultButton2, "Ошибка")
-            Debug.Print "не крутит volt = " & oldTens & " " & tmpVolt
-            Debug.Print "не крутит enc = " & tmpEnc & " " & newEnc
+            ' Debug.Print "не крутит volt = " & oldTens & " " & tmpVolt
+            ' Debug.Print "не крутит enc = " & tmpEnc & " " & newEnc
             If ans = vbYes Then
                 stopBtn = True
             End If
         End If
+		' updating main angle and abs angle		 <---------
         mainAngle = ang
+		absAngle = protoAbs
         If Not getEncoder And Not stopBtn And accurate Then
             Dim answer As Integer
             answer = MsgBox("Не совпадает контрольный угол. Прервать замер?", vbQuestion + vbYesNo + vbDefaultButton2, "Ошибка")
