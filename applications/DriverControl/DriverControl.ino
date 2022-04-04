@@ -173,6 +173,7 @@ void angleSet(double a){
 	// Serial.print(preAngl);
 	// Serial.print("        ");
 	// Serial.println(newAngl);
+	// Serial.println(mainAngle);
 	// int tmpAcc = acc;
 	if (preAngl < mainAngle) {
 		setParam();
@@ -263,9 +264,11 @@ void move() {
 	rotate = true;
 	// Serial.println("main  and  new  Angles");
 	// Serial.print(mainAngle);
+	// Serial.print("  ");
+	// Serial.println(newAngl);
 	// Serial.print("steps to move = ");
-	//Serial.println(ps);
-	for (int i = 0; i < n; i++) {
+	// Serial.println(ps);
+	for (long i = 0; i < n; i++) {
 		if(digitalRead(stp)) {
 			stepSM();
 		}
