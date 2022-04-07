@@ -1,0 +1,47 @@
+type list
+version 0
+Toolpath\
+Toolpath\плата профиль д3
+Toolpath\плата дорожки 1 снаружи д3
+Toolpath\плата дорожки 2 внутри д2
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Workplane\2
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Macro\
+Featureset\
+NCProgram\
+NCProgram\плата профиль д3
+NCProgram\плата дорожки 1 снаружи д3
+NCProgram\плата дорожки 2 внутри д2
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM2x2
+Tool\EM3x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\плата для замеров
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\
