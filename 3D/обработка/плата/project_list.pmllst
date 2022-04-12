@@ -1,7 +1,8 @@
 type list
 version 0
 Toolpath\
-Toolpath\плата профиль д3
+Toolpath\плата профиль 1 д3
+Toolpath\плата профиль 2 д3
 Toolpath\плата дорожки 1 снаружи д3
 Toolpath\плата дорожки 2 внутри д2
 Group\
@@ -9,6 +10,7 @@ Pattern\
 Workplane\
 Workplane\1
 Workplane\2
+Workplane\3
 Setup\
 FeatureGroup\
 Boundary\
@@ -16,7 +18,8 @@ Boundary\1
 Macro\
 Featureset\
 NCProgram\
-NCProgram\плата профиль д3
+NCProgram\плата профиль 1 д3
+NCProgram\плата профиль 2 д3
 NCProgram\плата дорожки 1 снаружи д3
 NCProgram\плата дорожки 2 внутри д2
 Level\

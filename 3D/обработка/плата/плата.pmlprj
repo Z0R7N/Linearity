@@ -1,16 +1,19 @@
-13 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+16 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
 0 2
-07 апр 2022 10.02.42
+08 апр 2022 14.30.00
 x1dfc9220624d5e86000029e900000000.pmlent pmlEntLevel 'Config-0-Partition'
 x21919d20624d669c0001483600000000.pmlent pmlEntWorkplane '1'
 x22029d20624d68ea0002a7c600000000.pmlent pmlEntTool 'EM2x2'
 x220291c0624d68ed0002ac2700000000.pmlent pmlEntTool 'EM3x2'
-x422bc350624d69140002cdc400000000.pmlent pmlEntToolpath 'плата профиль д3'
+x422bc350624d69140002cdc400000000.pmlent pmlEntToolpath 'плата профиль 1 д3'
+x4302172062500c1c00018da000000000.pmlent pmlEntToolpath 'плата профиль 2 д3'
 x44d77ac0624d7990000a17f100000000.pmlent pmlEntToolpath 'плата дорожки 1 снаружи д3'
 x6c387130624d7ab2000b109e00000000.pmlent pmlEntWorkplane '2'
 x6c7969a0624d7b1a000bd31800000000.pmlent pmlEntToolpath 'плата дорожки 2 внутри д2'
 x6c795da0624d7b3e000c681400000000.pmlent pmlEntBoundary '1'
-x2231e430624d78b00009096500000000.pmlent pmlEntNCProgram 'плата профиль д3'
+x42acaa4062500c3700020dfe00000000.pmlent pmlEntNCProgram 'плата профиль 1 д3'
+x42f2187062500c3a0002131700000000.pmlent pmlEntNCProgram 'плата профиль 2 д3'
 x215180c0624d5e6b0000260600000000.pmlent pmlEntModel 'плата для замеров'
-x42377460624e88dd00019a0f00000000.pmlent pmlEntNCProgram 'плата дорожки 1 снаружи д3'
-x4f8fd280624e8c73000999a300000000.pmlent pmlEntNCProgram 'плата дорожки 2 внутри д2'
+x425b023062501aa400019a7e00000000.pmlent pmlEntWorkplane '3'
+x2209e66062501bc4000624de00000000.pmlent pmlEntNCProgram 'плата дорожки 1 снаружи д3'
+x47e135e062501c8e0009e3be00000000.pmlent pmlEntNCProgram 'плата дорожки 2 внутри д2'
