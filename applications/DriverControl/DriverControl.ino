@@ -292,7 +292,7 @@ void setup() {
   digitalWrite(ENA, LOW);
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
-  Serial.begin(9600);
+  Serial.begin(115200);
   attachInterrupt (0, inter, CHANGE);
   attachInterrupt (1, inter, CHANGE);
 }
