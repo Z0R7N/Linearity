@@ -1,0 +1,44 @@
+type list
+version 0
+Toolpath\
+Toolpath\держатель отв д3
+Toolpath\держатель профиль д3
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\1_1
+Macro\
+Featureset\
+Featureset\1
+NCProgram\
+NCProgram\держатель д3
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM3x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\держатель датчика
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\

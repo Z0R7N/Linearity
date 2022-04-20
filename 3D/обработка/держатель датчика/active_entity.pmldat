@@ -1,0 +1,6 @@
+5 1 # Active Entities (DO NOT EDIT!)
+45a9bc70625fdc2c00053f0200000000 pmlEntBoundary '1_1'
+45a95190625fdc2b000533dc00000000 pmlEntToolpath 'держатель профиль д3'
+22b60cf0625fd99c0001d96e00000000 pmlEntFeature '1'
+22ef5a30625fd965000174c200000000 pmlEntWorkplane '1'
+1a96eba0625fd8d4000075a800000000 pmlEntTool 'EM3x2'

@@ -1,0 +1,31 @@
+type list
+version 0
+Toolpath\
+Toolpath\диск 1 пазы д0,8
+Toolpath\диск 2 д3
+Toolpath\диск профиль д3
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\2
+Boundary\3
+Macro\
+Featureset\
+NCProgram\
+NCProgram\диск 1 пазы д0,8
+NCProgram\диск 2 д3
+Level\
+Level\Config-0-Partition
+Tool\
+Tool\EM3x2
+Tool\EM 0.8x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\диск датчика

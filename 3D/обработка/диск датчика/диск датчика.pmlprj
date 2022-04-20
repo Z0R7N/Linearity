@@ -1,0 +1,16 @@
+13 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+20 апр 2022 14.11.48
+x441fd530625fe23b0006cb6b00000000.pmlent pmlEntModel 'диск датчика'
+x22b55fd0625fe2480006cd4d00000000.pmlent pmlEntLevel 'Config-0-Partition'
+x22b601d0625fe27400073e2c00000000.pmlent pmlEntTool 'EM3x2'
+x48c296d0625fe279000741f900000000.pmlent pmlEntTool 'EM 0.8x2'
+x49642d50625fe6000007f2f900000000.pmlent pmlEntWorkplane '1'
+x40967290625fe62c00084dc300000000.pmlent pmlEntBoundary '1'
+x45aa3270625fe64e0009004900000000.pmlent pmlEntToolpath 'диск 1 пазы д0,8'
+x412cc670625fe6c80009442700000000.pmlent pmlEntNCProgram 'диск 1 пазы д0,8'
+x44a011f0625fe8ac000a949b00000000.pmlent pmlEntToolpath 'диск профиль д3'
+x444a3bf0625fe8b7000ab4ee00000000.pmlent pmlEntToolpath 'диск 2 д3'
+x5000ae70625fe8df000add6a00000000.pmlent pmlEntNCProgram 'диск 2 д3'
+x4a1027a0625fe93c000b108900000000.pmlent pmlEntBoundary '2'
+x49316d10625fe9e8000c280c00000000.pmlent pmlEntBoundary '3'

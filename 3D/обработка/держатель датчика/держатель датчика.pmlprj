@@ -1,0 +1,13 @@
+10 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+20 апр 2022 13.13.05
+x21b6be80625fd55700002be000000000.pmlent pmlEntLevel 'Config-0-Partition'
+x21acfdc0625fd53f0000295600000000.pmlent pmlEntModel 'держатель датчика'
+x1a96eba0625fd8d4000075a800000000.pmlent pmlEntTool 'EM3x2'
+x22ef5a30625fd965000174c200000000.pmlent pmlEntWorkplane '1'
+x22b60cf0625fd99c0001d96e00000000.pmlent pmlEntFeature '1'
+x1e63e110625fd9e100025ae000000000.pmlent pmlEntToolpath 'держатель отв д3'
+x40deedc0625fda1300028ff100000000.pmlent pmlEntNCProgram 'держатель д3'
+x40d5e460625fdb860003702f00000000.pmlent pmlEntBoundary '1'
+x45a95190625fdc2b000533dc00000000.pmlent pmlEntToolpath 'держатель профиль д3'
+x45a9bc70625fdc2c00053f0200000000.pmlent pmlEntBoundary '1_1'
