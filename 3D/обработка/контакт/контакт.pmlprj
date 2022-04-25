@@ -1,0 +1,9 @@
+6 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 апр 2022 11.57.34
+x44f9ac106261081b0005d33b00000000.pmlent pmlEntLevel 'Config-0-Partition'
+x44fa7e106261080f0005d1e000000000.pmlent pmlEntModel 'контакт'
+x2191223062611bab00006efd00000000.pmlent pmlEntTool 'EM2.5x2'
+x21bd0e7062611bc3000089c200000000.pmlent pmlEntWorkplane '1'
+x21bd0ad062611bc80000915e00000000.pmlent pmlEntToolpath 'контакт д2,5'
+x45738d3062611c5a0001132e00000000.pmlent pmlEntNCProgram 'контакт д2,5'

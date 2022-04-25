@@ -3,18 +3,21 @@
 + - вращение по часовой стрелке
 - - вращение против часовой
 / - вращение на 3'
+<> - проверка на установку угла в 120 градусов
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
 e - запрос на число энкодера
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
+zero - поиск нулевой позиции, которая равна 120 градусам прибора
 */
 
 #define en2 2
 #define en3 3
 
 #define stp 7 // button for enable moving
+#define zero 12 // zero point by sensor
 
 #define PUL 5 // impulse for driver
 #define DIR 6 // direction for driver
@@ -32,9 +35,10 @@ int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
-bool cw = true;					// clockwise or counterclockwise rotating
-int coefAngl = 800;					// coefficient for pre angle
+bool cw = true;						// clockwise or counterclockwise rotating
+int coefAngl = 1000;					// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
+bool zeroPoint = false;				// bool value for set sensor point
 
 
 //declare a function reset with address 0
@@ -97,7 +101,7 @@ void getCommand(String com){
 	double num = -1;
 	if (com.length() > 0) {
 		num = com.toDouble();
-		// Serial.println(num);
+		 // Serial.println(num);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
@@ -105,6 +109,12 @@ void getCommand(String com){
 		encdr = 0;
 		Serial.println("0");
 		Serial.flush();
+	}
+	else if (com == "zero") {
+		searchZero();
+	}
+	else if (com == "<>") {
+		Serial.println(zeroPoint);
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
@@ -162,6 +172,26 @@ void getCommand(String com){
 		Serial.println("error");
 		Serial.flush();
 	}
+}
+
+// search point zero
+void searchZero(){
+	int tmpPs = ps;
+	ps = 30;
+	long limit = 3000;
+	while (digitalRead(zero)) {
+		if(limit == 0) {
+			digitalWrite(DIR, HIGH);
+			cw = false;			
+		}
+		stepSM();
+		limit--;
+	}
+	mainAngle = 17066.66666666;
+	encdr = 341.3333333333;
+	zeroPoint = true;
+	ps = tmpPs;
+	Serial.println(120);
 }
 
 // setting angle
@@ -288,11 +318,13 @@ void setup() {
   pinMode(en2, INPUT);
   pinMode(en3, INPUT);
   pinMode(stp, INPUT);
+  pinMode(zero, INPUT);
   //digitalWrite(ENA, HIGH);
   digitalWrite(ENA, LOW);
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
   Serial.begin(115200);
+  zeroPoint = !digitalRead(zero);
   attachInterrupt (0, inter, CHANGE);
   attachInterrupt (1, inter, CHANGE);
 }

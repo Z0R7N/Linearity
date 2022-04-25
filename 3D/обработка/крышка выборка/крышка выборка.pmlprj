@@ -1,0 +1,10 @@
+7 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 апр 2022 11.12.05
+x43ceea306261103d0006115000000000.pmlent pmlEntModel 'п_крышка.stp'
+x43e3ffe06261104b0006169800000000.pmlent pmlEntLevel '0'
+x48a82cc06261105f0006a21700000000.pmlent pmlEntWorkplane '1'
+x44949cd0626110a900073b9400000000.pmlent pmlEntTool 'EM2.5x2'
+x45115640626110c100077bc600000000.pmlent pmlEntBoundary '1'
+x1aa36220626110db00080b3a00000000.pmlent pmlEntToolpath 'крышка выборка д2,5'
+x4df614a0626111b4000a577900000000.pmlent pmlEntNCProgram 'крышка выборка д2,5'

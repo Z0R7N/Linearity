@@ -1,0 +1,25 @@
+type list
+version 0
+Toolpath\
+Toolpath\крышка выборка д2,5
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Macro\
+Featureset\
+NCProgram\
+NCProgram\крышка выборка д2,5
+Level\
+Level\0
+Tool\
+Tool\EM2.5x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\п_крышка.stp

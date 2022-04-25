@@ -1,0 +1,12 @@
+9 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+21 апр 2022 12.18.52
+x21cd5a406260fdb6000097a700000000.pmlent pmlEntLevel 'Config-0-Partition'
+x1ec769b06261004c0000f7dc00000000.pmlent pmlEntWorkplane '1'
+x227cbda0626104910001fe3600000000.pmlent pmlEntToolpath 'шайба отв д2,5'
+x228ca3a06261055c00026c8d00000000.pmlent pmlEntBoundary '1'
+x43e2c570626105ea00038f2300000000.pmlent pmlEntToolpath 'шайба отв д2,5 профиль'
+x456065c0626105ea000398c300000000.pmlent pmlEntBoundary '1_1'
+x00965ad06260fda4000095c200000000.pmlent pmlEntModel 'шайба прижима'
+x417646c0626120d9000060c000000000.pmlent pmlEntTool 'EM2.5x2'
+x437e73c0626121130000d67100000000.pmlent pmlEntNCProgram 'шайба отв д2,5'
