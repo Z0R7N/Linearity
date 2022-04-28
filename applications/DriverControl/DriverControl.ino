@@ -8,6 +8,7 @@
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
 e - запрос на число энкодера
+abs - запрос на абсолютный угол оси
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
 zero - поиск нулевой позиции, которая равна 120 градусам прибора
@@ -30,13 +31,14 @@ String ser = "";					// string from serial
 long mainAngle = 0;					// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
+long absAngle = -1;					// angle for check zero point equals 180 degrees
 int acc = 5;						// acceleration motor speed
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = 0;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
-int coefAngl = 1000;					// coefficient for pre angle
+int coefAngl = 1000;				// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
 
@@ -83,16 +85,22 @@ void stepSM(){
 	delayMicroseconds(ps);
 	if(!cw && digitalRead(DIR) == HIGH) {
 		mainAngle++;
+		absAngle--;
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
 		mainAngle--;
+		absAngle++;
 	}
 	else if (cw && digitalRead(DIR) == LOW) {
 		mainAngle++;
+		absAngle++;
 	}
 	else if (cw && digitalRead(DIR) == HIGH) {
 		mainAngle--;
+		absAngle--;
 	}
+	if (absAngle == -1) absAngle = 51199;
+	if (absAngle == 51200) absAngle = 0;
 }
 
 // recognising commands got from port
@@ -115,6 +123,16 @@ void getCommand(String com){
 	}
 	else if (com == "<>") {
 		Serial.println(zeroPoint);
+	}
+	else if (com == "[]"){
+		Serial.println(digitalRead(zero));
+	}
+	else if (com == "#") {
+		Serial.println(round(encdr / enCoeff));
+	}
+	else if (com == "abs") {
+		long x = absAngle >= 0 ? round(absAngle / angleStep) : absAngle;
+		Serial.println(x);
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
@@ -177,21 +195,33 @@ void getCommand(String com){
 // search point zero
 void searchZero(){
 	int tmpPs = ps;
+	long cnt = 0;
 	ps = 30;
 	long limit = 3000;
-	while (digitalRead(zero)) {
+	while (cnt < 500) {
+		if (!digitalRead(zero)) {
+			cnt++;
+		} else {
+			cnt = 0;
+		}
 		if(limit == 0) {
 			digitalWrite(DIR, HIGH);
-			cw = false;			
 		}
 		stepSM();
 		limit--;
 	}
-	mainAngle = 17066.66666666;
-	encdr = 341.3333333333;
-	zeroPoint = true;
+	setValueZero();
 	ps = tmpPs;
 	Serial.println(120);
+}
+
+// set zero point for value
+void setValueZero(){
+	mainAngle = 17066.33333333;
+	encdr = 341;
+	zeroPoint = true;
+	absAngle = 25599.5;
+	// absAngle = 25600;
 }
 
 // setting angle
@@ -324,7 +354,9 @@ void setup() {
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
   Serial.begin(115200);
-  zeroPoint = !digitalRead(zero);
+  if (!digitalRead(zero)) {
+	  setValueZero();
+  }
   attachInterrupt (0, inter, CHANGE);
   attachInterrupt (1, inter, CHANGE);
 }
