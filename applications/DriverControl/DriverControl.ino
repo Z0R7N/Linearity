@@ -195,30 +195,44 @@ void getCommand(String com){
 // search point zero
 void searchZero(){
 	int tmpPs = ps;
-	long cnt = 0;
-	ps = 30;
-	long limit = 3000;
-	while (cnt < 500) {
-		if (!digitalRead(zero)) {
-			cnt++;
-		} else {
-			cnt = 0;
+	ps = 80;
+	if (digitalRead(zero)) {
+		if (zeroPoint) {
+			calculateDir();
 		}
-		if(limit == 0) {
-			digitalWrite(DIR, HIGH);
+		long cnt = 0;
+		while (cnt < 700) {
+			if (!digitalRead(zero)) {
+				cnt++;
+			} else {
+				cnt = 0;
+			}
+			stepSM();
 		}
-		stepSM();
-		limit--;
 	}
 	setValueZero();
 	ps = tmpPs;
 	Serial.println(120);
 }
 
+// rotate to 180 abs
+void calculateDir(){
+	long d = absAngle - 25599.5;
+	if (d == 0) return;
+	if (d > 0) {
+		digitalWrite(DIR, HIGH);
+	} else {
+		digitalWrite(DIR, LOW);
+	}
+	
+}
+
 // set zero point for value
 void setValueZero(){
-	mainAngle = 17066.33333333;
-	encdr = 341;
+	if (!zeroPoint) {
+		mainAngle = 17066.33333333;
+		encdr = 341;
+	}
 	zeroPoint = true;
 	absAngle = 25599.5;
 	// absAngle = 25600;
