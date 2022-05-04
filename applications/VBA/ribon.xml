@@ -1,28 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="ribOnLoad">
-	<ribbon startFromScratch="false">
-		<tabs>
-			<tab id="linearity" label="Линейность">
-				<group id="linear" label="Проверка линейности">
-					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" />
-					<checkBox id="bxCorrectAngle" label="Поправки на углы" getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
-					<labelControl id="lblcrntUP" label="Угол"/>
-				</group>
-				<group id="checkAngle" label="Один угол">
-					<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
-				</group>
-				<group id="manual" label="Ручное управление">
-					<button id="btnSpeedInc" label="Увеличить шаг" imageMso="_3DPerspectiveIncrease" onAction="IncreaceAngle" size="large" />
-					<labelControl id="lblStep" label="Шаг" />
-					<labelControl id="lblStepAng" label="1"/>
-					<button id="btnSpeedDec" label="Уменьшить шаг" imageMso="_3DPerspectiveDecrease" onAction="DecreaceAngle" size="large" />
-					<button id="rotateCCW" label="Вперед" imageMso="ForwardAttach" onAction="rtCCW" size="large" />
-					<button id="rotateCW" label="Назад" imageMso="BackAttach" onAction="rtCW" size="large" />
-				</group>
-				<group id="curAngl" label="Текущий угол">
-					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
-				</group>
-			</tab>
-		</tabs>
-	</ribbon>
-</customUI>
+<group id="linear" label="Проверка линейности">
+	<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" />
+	<checkBox id="bxCorrectAngle" label="Поправки на углы" getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
+	<labelControl id="lblcrntUP" label="Угол"/>
+</group>
+<group id="checkAngle" label="Один угол">
+	<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
+</group>
+<group id="manual" label="Ручное управление">
+	<button id="btnSpeedInc" label="Увеличить шаг" imageMso="_3DPerspectiveIncrease" onAction="IncreaceAngle" size="large" />
+	<labelControl id="lblStep" label="Шаг" />
+	<labelControl id="lblStepAng" label="1"/>
+	<button id="btnSpeedDec" label="Уменьшить шаг" imageMso="_3DPerspectiveDecrease" onAction="DecreaceAngle" size="large" />
+	<button id="rotateCCW" label="Вперед" imageMso="ForwardAttach" onAction="rtCCW" size="large" />
+	<button id="rotateCW" label="Назад" imageMso="BackAttach" onAction="rtCW" size="large" />
+</group>
+<group id="curAngl" label="Текущий угол">
+	<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
+</group>

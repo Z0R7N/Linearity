@@ -3,12 +3,14 @@
 + - вращение по часовой стрелке
 - - вращение против часовой
 / - вращение на 3'
-<> - проверка на установку угла в 120 градусов
+<> - проверка на установку абсолютного угла
+[] - проверка датчика, если 0 то в нулевой точке
+# - выводит основной угол
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
 saчисло - установить ускорение от 1 до 9
 e - запрос на число энкодера
-abs - запрос на абсолютный угол оси
+abs - выводит абсолютный угол оси
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
 zero - поиск нулевой позиции, которая равна 120 градусам прибора
@@ -28,13 +30,13 @@ int maxPs = 1000;
 int minPs = 80;
 
 String ser = "";					// string from serial
-long mainAngle = 0;					// countong for angle of position steper motor (from 0 to 51200)
+long mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
 long absAngle = -1;					// angle for check zero point equals 180 degrees
 int acc = 5;						// acceleration motor speed
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
-long encdr = 0;						// counting encoder
+long encdr = -1;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
@@ -128,7 +130,8 @@ void getCommand(String com){
 		Serial.println(digitalRead(zero));
 	}
 	else if (com == "#") {
-		Serial.println(round(encdr / enCoeff));
+		long ma = mainAngle >= 0 ? round(mainAngle / angleStep) : mainAngle;
+		Serial.println(ma);
 	}
 	else if (com == "abs") {
 		long x = absAngle >= 0 ? round(absAngle / angleStep) : absAngle;
@@ -162,8 +165,12 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else if (com == "e") {
-		Serial.println(round(encdr / enCoeff));
+		long enn = encdr >= 0 ? round(encdr / enCoeff) : encdr;
+		Serial.println(enn);
 		Serial.flush();
+	}
+	else if (com == "help") {
+		instruction();
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
@@ -186,7 +193,6 @@ void getCommand(String com){
 		angleSet(0);
 	}
 	else {
-		// instruction();
 		Serial.println("error");
 		Serial.flush();
 	}
@@ -261,7 +267,7 @@ void angleSet(double a){
 
 // instruction
 void instruction(){
-	Serial.println("команды");
+	Serial.println("команды:");
 	Serial.println("* - задает нулевую точку");
 	Serial.println("+ - вращение по часовой стрелке");
 	Serial.println("- - вращение против часовой");
@@ -271,6 +277,12 @@ void instruction(){
 	Serial.println("saчисло - установить ускорение от 1 до 9");
 	Serial.println("e - запрос на число энкодера");
 	Serial.println("hlo - запрос на проверку порта");
+	Serial.println("<> - проверка на установку абсолютного угла");
+	Serial.println("[] - проверка датчика, если 0 то в нулевой точке");
+	Serial.println("# - выводит основной угол");
+	Serial.println("abs - выводит абсолютный угол оси");
+	Serial.println("reset - перезагрузить устройство");
+	Serial.println("zero - поиск нулевой позиции, которая равна 120 градусам прибора");
 }
 
 // calculating speed
