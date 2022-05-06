@@ -8,7 +8,7 @@ double koef = 9.142857142857;
 void(* resetFunc) (void) = 0;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   analogReference(DEFAULT);
   pinMode(RES, INPUT);
 }
@@ -34,17 +34,18 @@ void loop() {
 			// }
 			if (ser == "reset") resetFunc();
 			else if (ser == "*idn?") {
-				Serial.println("GW, GDM8255A, 1.0");
-				Serial.flush();
+				Serial.println("DM, GDM8255A, 1.0");
+				// Serial.flush();
 			}
 			else if (ser == "conf:stat:rang?") {
-				if (millis() % 2 == 0){
-					Serial.println("DCV: 1");
-				}
-				else {
-					Serial.println("DCV: 2");
-				}
-				Serial.flush();
+				Serial.println("2");
+				// if (millis() % 2 == 0){
+					// Serial.println("1");
+				// }
+				// else {
+					// Serial.println("2");
+				// }
+				// Serial.flush();
 			}
 			else{
 				answer();
@@ -84,5 +85,5 @@ void answer() {
 	// Serial.println(result);
 	String exp = expa(result);
 	Serial.println(exp);
-	Serial.flush();
+	// Serial.flush();
 }
