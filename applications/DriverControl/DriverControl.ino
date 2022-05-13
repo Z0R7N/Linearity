@@ -122,20 +122,25 @@ void getCommand(String com){
 	}
 	else if (com == "zero") {
 		searchZero();
+		Serial.flush();
 	}
 	else if (com == "<>") {
 		Serial.println(zeroPoint);
+		Serial.flush();
 	}
 	else if (com == "[]"){
 		Serial.println(digitalRead(zero));
+		Serial.flush();
 	}
 	else if (com == "#") {
 		long ma = mainAngle >= 0 ? round(mainAngle / angleStep) : mainAngle;
 		Serial.println(ma);
+		Serial.flush();
 	}
 	else if (com == "abs") {
 		long x = absAngle >= 0 ? round(absAngle / angleStep) : absAngle;
 		Serial.println(x);
+		Serial.flush();
 	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
@@ -171,6 +176,7 @@ void getCommand(String com){
 	}
 	else if (com == "help") {
 		instruction();
+		Serial.flush();
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
@@ -188,9 +194,11 @@ void getCommand(String com){
 	}
 	else if (num > 0) {
 		angleSet(num);
+		Serial.flush();
 	}
 	else if (com == "0") {
 		angleSet(0);
+		Serial.flush();
 	}
 	else {
 		Serial.println("error");
@@ -219,6 +227,7 @@ void searchZero(){
 	setValueZero();
 	ps = tmpPs;
 	Serial.println(120);
+	Serial.flush();
 }
 
 // rotate to 180 abs
@@ -263,6 +272,7 @@ void angleSet(double a){
 	setParam();
 	// acc = tmpAcc;
 	Serial.println(round(encdr / enCoeff));
+	Serial.flush();
 }
 
 // instruction

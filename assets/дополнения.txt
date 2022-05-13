@@ -1,3 +1,98 @@
 возможность выставить нулевую точку вручную
 поворачивать устройство вручную
 отправлять перепроверять нужный из таблицы угол (один угол)
+
+------------------------------
+изменить надпись кнопки в ленте
+В данном примере надпись на кнопке обновляется после нажатия на эту же кнопку. Обновление может выполняться и при наступлении других событий (открытие-закрытие документа, нажатие другой кнопки, какое-то действие пользователя и т.п.).
+
+Разметка ленты:
+
+
+
+<customUI
+
+  xmlns="http://schemas.microsoft.com/office/2006/01/customui"
+
+  onLoad="OnLoadRibbon">
+
+...
+
+ <button id="типФильтра" getLabel="GetFilterLabel"
+
+  onAction="FilterSumRibbon" />
+
+...
+
+Код VBA с обработчиками событий:
+
+
+
+'ленточный интерфейс
+
+Dim ribbon As IRibbonUI
+
+ 
+
+Sub OnLoadRibbon(ui As IRibbonUI)
+
+  'получаем ссылку на ленту для последующего использования
+
+  Set ribbon = ui
+
+End Sub
+
+ 
+
+'задаёт надпись для элемента управления на ленте
+
+Public Sub GetFilterLabel(control As IRibbonControl, ByRef label)
+
+  Dim a As Integer
+
+  a = CInt(getGlob("FilterSum", "", 0))
+
+  Select Case a
+
+    Case -1
+
+      label = "Совпадение фильтров"
+
+    Case 1
+
+      label = "Суммирование фильтров"
+
+    Case 0
+
+      label = "Одиночный фильтр"
+
+    Case 2
+
+      label = "Вычитание фильтров"
+
+  End Select
+
+End Sub
+
+ 
+
+Public Sub FilterSumRibbon(control As IRibbonControl)
+
+  Dim a As Variant
+
+  a = CInt(getGlob("FilterSum", "", 0))
+
+  a = a + 1
+
+  If a = 3 Then a = -1
+
+   
+
+  Call SetGlob("FilterSum", CStr(a), "")
+
+  'обновить надпись на кнопке ленты
+
+  ribbon.InvalidateControl "типФильтра"
+
+End Sub
+

@@ -15,5 +15,5 @@
 	<button id="rotateCW" label="Назад" imageMso="BackAttach" onAction="rtCW" size="large" />
 </group>
 <group id="curAngl" label="Текущий угол">
-	<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
+	<button id="btnZero" label="Установить" imageMso="_0" getLabel="gtLblZero" onAction="btnSetZero" size="large" />
 </group>
