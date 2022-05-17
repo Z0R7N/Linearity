@@ -14,6 +14,8 @@ abs - выводит абсолютный угол оси
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
 zero - поиск нулевой позиции, которая равна 120 градусам прибора
+blck - включить и
+unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов
 */
 
 #define en2 2
@@ -29,6 +31,7 @@ zero - поиск нулевой позиции, которая равна 120 �
 int maxPs = 1000;
 int minPs = 80;
 
+bool blck = true;					// block for danger rotate (<40 and >320 degrees)
 String ser = "";					// string from serial
 long mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
@@ -122,6 +125,16 @@ void getCommand(String com){
 	}
 	else if (com == "zero") {
 		searchZero();
+		Serial.flush();
+	}
+	else if (com == "blck") {
+		blck = true;
+		Serial.println(blck);
+		Serial.flush();
+	}
+	else if (com == "unblck") {
+		blck = false;
+		Serial.println(blck);
 		Serial.flush();
 	}
 	else if (com == "<>") {
@@ -272,6 +285,7 @@ void angleSet(double a){
 	setParam();
 	// acc = tmpAcc;
 	Serial.println(round(encdr / enCoeff));
+	Serial.println(absAngle);
 	Serial.flush();
 }
 
@@ -293,6 +307,8 @@ void instruction(){
 	Serial.println("abs - выводит абсолютный угол оси");
 	Serial.println("reset - перезагрузить устройство");
 	Serial.println("zero - поиск нулевой позиции, которая равна 120 градусам прибора");
+	Serial.println("blck - включить и");
+	Serial.println("unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов");
 }
 
 // calculating speed
@@ -365,7 +381,7 @@ void move() {
 	// Serial.print("steps to move = ");
 	// Serial.println(ps);
 	for (long i = 0; i < n; i++) {
-		if(digitalRead(stp)) {
+		if(digitalRead(stp) && blockMove()) {
 			stepSM();
 		}
 	}
@@ -375,6 +391,14 @@ void move() {
 	// Serial.print("encoder = ");
 	// Serial.println(encdr);
 	// Serial.println();
+}
+
+bool blockMove(){
+	bool blocker = true;
+	if (blck && (absAngle < 5689 || absAngle > 45511)){
+		blocker = false;
+	}
+	return blocker;
 }
 
 void setup() {
