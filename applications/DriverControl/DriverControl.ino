@@ -1,5 +1,6 @@
 /*  команды
 * - задает нулевую точку
+^ - задает основному углу 120 градусов
 + - вращение по часовой стрелке
 - - вращение против часовой
 / - вращение на 3'
@@ -8,12 +9,11 @@
 # - выводит основной угол
 число - угол на который надо поставить ось мотора
 ssчисло - установить скорость, от 1 до 9
-saчисло - установить ускорение от 1 до 9
 e - запрос на число энкодера
 abs - выводит абсолютный угол оси
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
-zero - поиск нулевой позиции, которая равна 120 градусам прибора
+! - поиск нулевой позиции, которая равна 120 градусам прибора
 blck - включить и
 unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов
 */
@@ -32,18 +32,18 @@ int maxPs = 1000;
 int minPs = 80;
 
 bool blck = true;					// block for danger rotate (<40 and >320 degrees)
+bool goMove = true;					// if block for move (<40 and >320 degrees)
 String ser = "";					// string from serial
 long mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
 long newAngl = 0;					// angle for motor move
 long preAngl;						// angle there motor must move before new angle
 long absAngle = -1;					// angle for check zero point equals 180 degrees
-int acc = 5;						// acceleration motor speed
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
 long encdr = -1;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
-int coefAngl = 1000;				// coefficient for pre angle
+int coefAngl = 1422;				// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
 
@@ -54,58 +54,56 @@ void(* resetFunc) (void) = 0;
 void inter() {
 	if(!cw && digitalRead(DIR) == HIGH) {
 		encdr++;
-		// if (encdr >= newAngl) {
-			// Serial.print(go);
-//			 Serial.println("lse");
-		// }
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
 		encdr--;
-		// if (encdr <= newAngl) {
-			// Serial.print(go);
-			// Serial.println(" go false");
-		// }
 	}
 	else if (cw && digitalRead(DIR) == LOW) {
 		encdr++;
-		// if (encdr >= newAngl) {
-			// Serial.print(go);
-			// Serial.println(" go false");
-		// }
 	}
 	else if (cw && digitalRead(DIR) == HIGH) {
 		encdr--;
-		// if (encdr <= newAngl) {
-			// Serial.print(go);
-			// Serial.println(" go false");
-		// }
 	}
 }
 
 // send pulse to driver
 void stepSM(){
-	digitalWrite(PUL, HIGH);
-	delayMicroseconds(ps);
-	digitalWrite(PUL, LOW);
-	delayMicroseconds(ps);
+	goMove = true;
 	if(!cw && digitalRead(DIR) == HIGH) {
-		mainAngle++;
 		absAngle--;
+		mainAngle++;
+	if (blockMove()) returnAbsAngle(true, false);
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
-		mainAngle--;
 		absAngle++;
+		mainAngle--;
+		if (blockMove()) returnAbsAngle(false, true);
 	}
 	else if (cw && digitalRead(DIR) == LOW) {
-		mainAngle++;
 		absAngle++;
+		mainAngle++;
+		if (blockMove()) returnAbsAngle(false, false);
 	}
 	else if (cw && digitalRead(DIR) == HIGH) {
-		mainAngle--;
 		absAngle--;
+		mainAngle--;
+		if (blockMove()) returnAbsAngle(true, true);
 	}
-	if (absAngle == -1) absAngle = 51199;
-	if (absAngle == 51200) absAngle = 0;
+	if (goMove) {
+		digitalWrite(PUL, HIGH);
+		delayMicroseconds(ps);
+		digitalWrite(PUL, LOW);
+		delayMicroseconds(ps);
+		if (absAngle == -1) absAngle = 51199;
+		if (absAngle == 51200) absAngle = 0;
+	}
+}
+
+// change back absAngle
+void returnAbsAngle (bool incrA, bool incrM) {
+	absAngle = incrA ? ++absAngle : --absAngle;
+	mainAngle = incrM ? ++mainAngle : -- mainAngle;
+	goMove = false;
 }
 
 // recognising commands got from port
@@ -123,7 +121,7 @@ void getCommand(String com){
 		Serial.println("0");
 		Serial.flush();
 	}
-	else if (com == "zero") {
+	else if (com == "zero" || com == "!") {
 		searchZero();
 		Serial.flush();
 	}
@@ -167,6 +165,12 @@ void getCommand(String com){
 		Serial.println(com);
 		Serial.flush();
 	}
+	else if (com == "^") {
+		mainAngle = 17066.33333333;
+		encdr = 341;
+		Serial.println("120");
+		Serial.flush();
+	}
 	else if (com == "/") {
 		angleSet(mainAngle + 2);
 		Serial.flush();
@@ -193,16 +197,8 @@ void getCommand(String com){
 	}
 	else if (st == "ss") {
 		String spd = com.substring(2);
-		// Serial.println(spd + " get command ss");
 		ps = speedMotor(spd);
-		// Serial.print("ps ");
 		Serial.println(ps);
-		Serial.flush();
-	}
-	else if (st == "sa") {
-		String accel = com.substring(2);
-		acc = accelerationMotor(accel);
-		Serial.println(acc);
 		Serial.flush();
 	}
 	else if (num > 0) {
@@ -228,6 +224,8 @@ void searchZero(){
 			calculateDir();
 		}
 		long cnt = 0;
+		bool tmpBlck = blck;
+		blck = false;
 		while (cnt < 700) {
 			if (!digitalRead(zero)) {
 				cnt++;
@@ -236,6 +234,7 @@ void searchZero(){
 			}
 			stepSM();
 		}
+		blck = tmpBlck;
 	}
 	setValueZero();
 	ps = tmpPs;
@@ -271,21 +270,12 @@ void angleSet(double a){
 	double tmp = a * angleStep;
 	preAngl = round(tmp);
 	newAngl = preAngl - coefAngl;
-	// Serial.println("pre and new angles");
-	// Serial.print(preAngl);
-	// Serial.print("        ");
-	// Serial.println(newAngl);
-	// Serial.println(mainAngle);
-	// int tmpAcc = acc;
 	if (preAngl < mainAngle) {
 		setParam();
-		// acc = 1;
 	}
 	newAngl = preAngl;
 	setParam();
-	// acc = tmpAcc;
 	Serial.println(round(encdr / enCoeff));
-	Serial.println(absAngle);
 	Serial.flush();
 }
 
@@ -293,12 +283,12 @@ void angleSet(double a){
 void instruction(){
 	Serial.println("команды:");
 	Serial.println("* - задает нулевую точку");
+	Serial.println("^ - задает основному углу 120 градусов");
 	Serial.println("+ - вращение по часовой стрелке");
 	Serial.println("- - вращение против часовой");
 	Serial.println("/ - вращение на 3'");
 	Serial.println("число - угол на который надо поставить ось мотора");
 	Serial.println("ssчисло - установить скорость, от 1 до 9");
-	Serial.println("saчисло - установить ускорение от 1 до 9");
 	Serial.println("e - запрос на число энкодера");
 	Serial.println("hlo - запрос на проверку порта");
 	Serial.println("<> - проверка на установку абсолютного угла");
@@ -306,7 +296,7 @@ void instruction(){
 	Serial.println("# - выводит основной угол");
 	Serial.println("abs - выводит абсолютный угол оси");
 	Serial.println("reset - перезагрузить устройство");
-	Serial.println("zero - поиск нулевой позиции, которая равна 120 градусам прибора");
+	Serial.println("! - поиск нулевой позиции, которая равна 120 градусам прибора");
 	Serial.println("blck - включить и");
 	Serial.println("unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов");
 }
@@ -319,33 +309,16 @@ int speedMotor(String s){
 		instruction();
 	}
 	else{
-		// Serial.print("calculate speed ");
-		// Serial.println(speed);
 		speed = 9 - speed;
 		speed = speed * 100 / 8;
 		speed = 920 * speed / 100;
 		res = round(speed);
 		res += 80;
 	}
-	// Serial.println(res + " - calcul speed res = ");
-	// Serial.println(s + " string coming");
 	res = res == -1 ? ps : res;
 	return res;
 }
 
-// calculating acceleration
-int accelerationMotor(String a){
-	int res = -1;
-	int acceleration = a.toInt();
-	if (acceleration > 9 || acceleration < 1 || a.length() == 0) {
-		instruction();
-	}
-	else {
-		res = acceleration;
-	}
-	res = res == -1 ? acc : res;
-	return res;
-}
 
 // setting parameters for moving
 void setParam (){
@@ -365,7 +338,6 @@ void setParam (){
 			digitalWrite(DIR, LOW);
 		}
 	}
-	// Serial.println(go);
 	if (newAngl != mainAngle) move();
 }
 
@@ -374,29 +346,24 @@ void move() {
 	long n = mainAngle - newAngl;
 	n = n < 0 ? n * -1 : n;
 	rotate = true;
-	// Serial.println("main  and  new  Angles");
-	// Serial.print(mainAngle);
-	// Serial.print("  ");
-	// Serial.println(newAngl);
-	// Serial.print("steps to move = ");
-	// Serial.println(ps);
 	for (long i = 0; i < n; i++) {
-		if(digitalRead(stp) && blockMove()) {
+		if(digitalRead(stp)) {
 			stepSM();
 		}
 	}
 	rotate = false;
-	// Serial.print("угол = ");
-	// Serial.println(newAngl);
-	// Serial.print("encoder = ");
-	// Serial.println(encdr);
-	// Serial.println();
 }
 
+// check for rotating over boundaries
 bool blockMove(){
-	bool blocker = true;
-	if (blck && (absAngle < 5689 || absAngle > 45511)){
-		blocker = false;
+	bool blocker = false;
+	if (blck) {
+		if (absAngle == 5689 || absAngle < 5689) {
+			blocker = true;
+		}
+		if (absAngle == 45511 || absAngle > 45511) {
+			blocker = true;
+		}
 	}
 	return blocker;
 }
@@ -436,15 +403,9 @@ void loop() {
 	}
 	else {
 		if (ser != ""){
-			// Serial.println();
-			// Serial.println("==================");
-			// Serial.println("==================");
-			// Serial.print("serial = ");
-			// Serial.println(ser);
 			ser.trim();
 			getCommand(ser);
 			ser = "";
-			//Serial.flush();
 		}
 	}
 }
