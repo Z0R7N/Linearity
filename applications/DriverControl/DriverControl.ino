@@ -167,7 +167,7 @@ void getCommand(String com){
 	}
 	else if (com == "^") {
 		mainAngle = 17066.33333333;
-		encdr = 341;
+		encdr = 341.33333333;
 		Serial.println(round(mainAngle / angleStep));
 		Serial.flush();
 	}
@@ -210,8 +210,8 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else {
-		Serial.println("error");
-		Serial.flush();
+		// Serial.println();
+		// Serial.flush();
 	}
 }
 
