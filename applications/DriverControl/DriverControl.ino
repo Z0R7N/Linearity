@@ -144,12 +144,12 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else if (com == "#") {
-		long ma = mainAngle >= 0 ? round(mainAngle / angleStep) : mainAngle;
+		double ma = mainAngle >= 0 ? rounding(mainAngle / angleStep) : mainAngle;
 		Serial.println(ma);
 		Serial.flush();
 	}
 	else if (com == "abs") {
-		long x = absAngle >= 0 ? round(absAngle / angleStep) : absAngle;
+		double x = absAngle >= 0 ? rounding(absAngle / angleStep) : absAngle;
 		Serial.println(x);
 		Serial.flush();
 	}
@@ -168,7 +168,8 @@ void getCommand(String com){
 	else if (com == "^") {
 		mainAngle = 17066.33333333;
 		encdr = 341.33333333;
-		Serial.println(round(mainAngle / angleStep));
+		Serial.println(rounding(mainAngle / angleStep));
+		// Serial.println(round());
 		Serial.flush();
 	}
 	else if (com == "/") {
@@ -187,7 +188,7 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else if (com == "e") {
-		long enn = encdr >= 0 ? round(encdr / enCoeff) : encdr;
+		double enn = encdr >= 0 ? rounding(encdr / enCoeff) : encdr;
 		Serial.println(enn);
 		Serial.flush();
 	}
@@ -215,10 +216,20 @@ void getCommand(String com){
 	}
 }
 
+// rounding for numbers
+double rounding(double x){
+	x *= 100;
+	double y = round(x);
+	x = y / 100;
+	return x;
+}
+
 // search point zero
 void searchZero(){
 	int tmpPs = ps;
-	ps = 80;
+	if (absAngle < 0) {
+		ps = 80;
+	}
 	if (digitalRead(zero)) {
 		if (zeroPoint) {
 			calculateDir();
@@ -237,8 +248,8 @@ void searchZero(){
 		blck = tmpBlck;
 	}
 	setValueZero();
-	ps = tmpPs;
-	Serial.println(round(mainAngle / angleStep));
+	// ps = tmpPs;
+	Serial.println(rounding(mainAngle / angleStep));
 	Serial.flush();
 }
 
@@ -268,14 +279,14 @@ void setValueZero(){
 // setting angle
 void angleSet(double a){
 	double tmp = a * angleStep;
-	preAngl = round(tmp);
+	preAngl = rounding(tmp);
 	newAngl = preAngl - coefAngl;
 	if (preAngl < mainAngle) {
 		setParam();
 	}
 	newAngl = preAngl;
 	setParam();
-	Serial.println(round(encdr / enCoeff));
+	Serial.println(rounding(encdr / enCoeff));
 	Serial.flush();
 }
 
