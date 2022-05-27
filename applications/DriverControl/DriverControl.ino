@@ -14,8 +14,8 @@ abs - выводит абсолютный угол оси
 hlo - запрос на проверку порта
 reset - перезагрузить устройство
 ! - поиск нулевой позиции, которая равна 120 градусам прибора
-blck - включить и
-unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов
+b - включить и
+f - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов
 */
 
 #define en2 2
@@ -34,12 +34,12 @@ int minPs = 80;
 bool blck = true;					// block for danger rotate (<40 and >320 degrees)
 bool goMove = true;					// if block for move (<40 and >320 degrees)
 String ser = "";					// string from serial
-long mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
-long newAngl = 0;					// angle for motor move
-long preAngl;						// angle there motor must move before new angle
-long absAngle = -1;					// angle for check zero point equals 180 degrees
+double mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
+double newAngl = 0;					// angle for motor move
+double preAngl;						// angle there motor must move before new angle
+double absAngle = -1;					// angle for check zero point equals 180 degrees
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
-long encdr = -1;						// counting encoder
+double encdr = -1;						// counting encoder
 double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
 double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
@@ -72,7 +72,7 @@ void stepSM(){
 	if(!cw && digitalRead(DIR) == HIGH) {
 		absAngle--;
 		mainAngle++;
-	if (blockMove()) returnAbsAngle(true, false);
+		if (blockMove()) returnAbsAngle(true, false);
 	}
 	else if (!cw && digitalRead(DIR) == LOW) {
 		absAngle++;
@@ -94,8 +94,8 @@ void stepSM(){
 		delayMicroseconds(ps);
 		digitalWrite(PUL, LOW);
 		delayMicroseconds(ps);
-		if (absAngle == -1) absAngle = 51199;
-		if (absAngle == 51200) absAngle = 0;
+		if (absAngle < 0) absAngle += 51200.01;
+		if (absAngle > 51200) absAngle -= 51200.1;
 	}
 }
 
@@ -106,13 +106,21 @@ void returnAbsAngle (bool incrA, bool incrM) {
 	goMove = false;
 }
 
+// change comma to dot
+String comma2dot(String com){
+	for (int i = 0; i < com.length(); i++) {
+		if (char(com[i]) == 44) com[i] = char(46);
+	}
+	return com;
+}
+
 // recognising commands got from port
 void getCommand(String com){
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
+		com = comma2dot(com);
 		num = com.toDouble();
-		 // Serial.println(num);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
@@ -125,12 +133,12 @@ void getCommand(String com){
 		searchZero();
 		Serial.flush();
 	}
-	else if (com == "blck") {
+	else if (com == "blck" || com == "b") {
 		blck = true;
 		Serial.println(blck);
 		Serial.flush();
 	}
-	else if (com == "unblck") {
+	else if (com == "unblck" || com == "f") {
 		blck = false;
 		Serial.println(blck);
 		Serial.flush();
@@ -255,7 +263,7 @@ void searchZero(){
 
 // rotate to 180 abs
 void calculateDir(){
-	long d = absAngle - 25599.5;
+	double d = absAngle - 25599.5;
 	if (d == 0) return;
 	if (d > 0) {
 		digitalWrite(DIR, HIGH);
@@ -269,11 +277,11 @@ void calculateDir(){
 void setValueZero(){
 	if (!zeroPoint) {
 		mainAngle = 17066.33333333;
-		encdr = 341;
+		encdr = 341.33333333;
 	}
 	zeroPoint = true;
-	absAngle = 25599.5;
-	// absAngle = 25600;
+	// absAngle = 25599.5;
+	absAngle = 25600;
 }
 
 // setting angle
@@ -287,6 +295,12 @@ void angleSet(double a){
 	newAngl = preAngl;
 	setParam();
 	Serial.println(rounding(encdr / enCoeff));
+	// Serial.print("main: ");
+	// Serial.print(rounding(mainAngle / angleStep));
+	// Serial.print(" | ");
+	// Serial.print(rounding(absAngle / angleStep));
+	// Serial.println(" - abs");
+	// Serial.println(mainAngle);
 	Serial.flush();
 }
 
@@ -308,8 +322,8 @@ void instruction(){
 	Serial.println("abs - выводит абсолютный угол оси");
 	Serial.println("reset - перезагрузить устройство");
 	Serial.println("! - поиск нулевой позиции, которая равна 120 градусам прибора");
-	Serial.println("blck - включить и");
-	Serial.println("unblck - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов");
+	Serial.println("b - включить и");
+	Serial.println("f - отключить программное ограничение поворота на углы меньше 40 и больше 320 градусов");
 }
 
 // calculating speed
@@ -354,8 +368,9 @@ void setParam (){
 
 // move to new angle
 void move() {
-	long n = mainAngle - newAngl;
-	n = n < 0 ? n * -1 : n;
+	double dd = abs(mainAngle - newAngl);
+	long n = round(dd);
+	// n = n < 0 ? n * -1 : n;
 	rotate = true;
 	for (long i = 0; i < n; i++) {
 		if(digitalRead(stp)) {
@@ -369,10 +384,10 @@ void move() {
 bool blockMove(){
 	bool blocker = false;
 	if (blck) {
-		if (absAngle == 5689 || absAngle < 5689) {
+		if (absAngle < 5688.89) { //absAngle == 5689 || 
 			blocker = true;
 		}
-		if (absAngle == 45511 || absAngle > 45511) {
+		if (absAngle > 45511.11) { //absAngle == 45511 || 
 			blocker = true;
 		}
 	}

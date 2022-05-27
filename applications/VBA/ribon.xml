@@ -1,20 +1,24 @@
 <tab id="linearity" label="Линейность">
 	<group id="linear" label="Проверка линейности">
 		<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" />
-		<checkBox id="bxCorrectAngle" label="Поправки на углы" getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
-		<labelControl id="lblcrntUP" label="Угол"/>
+		<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
+		<labelControl id="info0" label="Поправки"/>
+		<labelControl id="info4" label="на углы"/>
 	</group>
 	<group id="checkAngle" label="Один угол">
 		<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
+		<button id="goAngle" label="Перейти к углу" imageMso="BackAttach" onAction="rot1Angle" size="large" />
 	</group>
 	<group id="manual" label="Ручное управление">
-		<button id="btnSpeedInc" label="Увеличить шаг" imageMso="_3DPerspectiveIncrease" onAction="IncreaceAngle" size="large" />
+		<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large" />
+		<labelControl id="info1" label="Увеличить шаг  -  стрелка вверх" />
+		<labelControl id="info2" label="Уменьшить шаг  -  стрелка вниз" />
+		<labelControl id="info3" label="Поворот  - стрелки влево-вправо" />
+		<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
+	</group>
+	<group id="info" label="Информация">
 		<labelControl id="lblStep" label="Шаг" />
-		<labelControl id="lblStepAng" label="1"/>
-		<button id="btnSpeedDec" label="Уменьшить шаг" imageMso="_3DPerspectiveDecrease" onAction="DecreaceAngle" size="large" />
-		<button id="rotateCCW" label="Вперед" imageMso="ForwardAttach" onAction="rtCCW" size="large" />
-		<button id="rotateCW" label="Назад" imageMso="BackAttach" onAction="rtCW" size="large" />
-		<button id="btnZero" label="Установить" imageMso="_0"  onAction="btnSetZero" size="large" /> <!-- getLabel="gtLblZero" -->
+		<labelControl id="lblcrntUP" label="Угол"/>
 	</group>
 	<group id="curAngl" label="Найти 120°">
 		<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large" />
