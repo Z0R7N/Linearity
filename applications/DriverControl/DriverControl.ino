@@ -28,6 +28,12 @@ f - отключить программное ограничение повор�
 #define DIR 6 // direction for driver
 #define ENA 4 // enable
 
+#define angleStep 142.2222222222
+#define enCoeff 2.844444444444
+#define coefAngl 1422
+// #define bounc 14					// value for bounce of rotate
+#define bounc 200					// delete ----------------------------------
+
 int maxPs = 1000;
 int minPs = 80;
 
@@ -36,16 +42,16 @@ bool goMove = true;					// if block for move (<40 and >320 degrees)
 String ser = "";					// string from serial
 double mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
 double newAngl = 0;					// angle for motor move
-double preAngl;						// angle there motor must move before new angle
-double absAngle = -1;					// angle for check zero point equals 180 degrees
+double absAngle = -1;				// angle for check zero point equals 180 degrees
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
-double encdr = -1;						// counting encoder
-double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
-double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
+double encdr = -1;					// counting encoder
+//const double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
+//const double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
-int coefAngl = 1422;				// coefficient for pre angle
+//const int coefAngl = 1422;		// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
+bool setBnc = true;					// if bounce of rotate is need
 
 
 //declare a function reset with address 0
@@ -116,6 +122,8 @@ String comma2dot(String com){
 
 // recognising commands got from port
 void getCommand(String com){
+	Serial.print("port data: ");
+	Serial.println(com);
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
@@ -188,7 +196,7 @@ void getCommand(String com){
 		resetFunc();
 	}
 	else if (com == "dir") {
-		Serial.println(digitalRead(DIR) ? "+" : "-");
+		Serial.println(cw ? "-" : "+");
 		Serial.flush();
 	}
 	else if (com == "hlo") {
@@ -219,7 +227,6 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else {
-		// Serial.println();
 		// Serial.flush();
 	}
 }
@@ -286,13 +293,26 @@ void setValueZero(){
 
 // setting angle
 void angleSet(double a){
+	double preAngl;						// angle there motor must move before new angle
 	double tmp = a * angleStep;
 	preAngl = rounding(tmp);
-	newAngl = preAngl - coefAngl;
 	if (preAngl < mainAngle) {
+		newAngl = preAngl - coefAngl;
+		Serial.print("угол люфта: ");
+		Serial.println(rounding(newAngl / angleStep));
+		setParam();
+	}
+	if (setBnc) {
+		double bndAngl;						// angle there motor must move before new angle
+		bndAngl = preAngl + bounc;
+		newAngl = bndAngl;
+		Serial.print("угол отскока: ");
+		Serial.println(rounding(newAngl / angleStep));
 		setParam();
 	}
 	newAngl = preAngl;
+	Serial.print("угол основной: ");
+	Serial.println(rounding(newAngl / angleStep));
 	setParam();
 	Serial.println(rounding(encdr / enCoeff));
 	// Serial.print("main: ");
