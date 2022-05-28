@@ -4,6 +4,7 @@
 		<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
 		<labelControl id="info0" label="Поправки"/>
 		<labelControl id="info4" label="на углы"/>
+		<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large" />
 	</group>
 	<group id="checkAngle" label="Один угол">
 		<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
