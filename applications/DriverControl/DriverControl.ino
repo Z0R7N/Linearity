@@ -31,8 +31,7 @@ f - отключить программное ограничение повор�
 #define angleStep 142.2222222222
 #define enCoeff 2.844444444444
 #define coefAngl 1422
-// #define bounc 14					// value for bounce of rotate
-#define bounc 200					// delete ----------------------------------
+#define bounc 71					// value for bounce of rotate
 
 int maxPs = 1000;
 int minPs = 80;
@@ -122,8 +121,6 @@ String comma2dot(String com){
 
 // recognising commands got from port
 void getCommand(String com){
-	Serial.print("port data: ");
-	Serial.println(com);
 	String st = "";
 	double num = -1;
 	if (com.length() > 0) {
@@ -298,21 +295,15 @@ void angleSet(double a){
 	preAngl = rounding(tmp);
 	if (preAngl < mainAngle) {
 		newAngl = preAngl - coefAngl;
-		Serial.print("угол люфта: ");
-		Serial.println(rounding(newAngl / angleStep));
 		setParam();
 	}
 	if (setBnc) {
 		double bndAngl;						// angle there motor must move before new angle
 		bndAngl = preAngl + bounc;
 		newAngl = bndAngl;
-		Serial.print("угол отскока: ");
-		Serial.println(rounding(newAngl / angleStep));
 		setParam();
 	}
 	newAngl = preAngl;
-	Serial.print("угол основной: ");
-	Serial.println(rounding(newAngl / angleStep));
 	setParam();
 	Serial.println(rounding(encdr / enCoeff));
 	// Serial.print("main: ");
