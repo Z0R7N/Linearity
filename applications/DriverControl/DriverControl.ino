@@ -31,7 +31,7 @@ f - отключить программное ограничение повор�
 #define angleStep 142.2222222222
 #define enCoeff 2.844444444444
 #define coefAngl 1422
-#define bounc 71					// value for bounce of rotate
+#define bounc 14					// value for bounce of rotate
 
 int maxPs = 1000;
 int minPs = 80;
@@ -44,10 +44,7 @@ double newAngl = 0;					// angle for motor move
 double absAngle = -1;				// angle for check zero point equals 180 degrees
 int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
 double encdr = -1;					// counting encoder
-//const double angleStep = 142.2222222222;	// coefficient for convert microstep to angle
-//const double enCoeff = 2.844444444444;	// coefficient for convert encoder to angle
 bool cw = true;						// clockwise or counterclockwise rotating
-//const int coefAngl = 1422;		// coefficient for pre angle
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
 bool setBnc = true;					// if bounce of rotate is need
