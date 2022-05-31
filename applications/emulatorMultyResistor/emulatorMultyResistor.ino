@@ -38,7 +38,7 @@ void loop() {
 				// Serial.flush();
 			}
 			else if (ser == "conf:stat:rang?") {
-				Serial.println("2");
+				Serial.println("3");
 				// if (millis() % 2 == 0){
 					// Serial.println("1");
 				// }

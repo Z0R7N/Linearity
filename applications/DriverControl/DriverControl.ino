@@ -31,7 +31,8 @@ f - отключить программное ограничение повор�
 #define angleStep 142.2222222222
 #define enCoeff 2.844444444444
 #define coefAngl 1422
-#define bounc 14					// value for bounce of rotate
+#define bounc 2						// value for bounce of rotate
+#define setBnc true					// if bounce of rotate is need
 
 int maxPs = 1000;
 int minPs = 80;
@@ -47,7 +48,6 @@ double encdr = -1;					// counting encoder
 bool cw = true;						// clockwise or counterclockwise rotating
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
-bool setBnc = true;					// if bounce of rotate is need
 
 
 //declare a function reset with address 0
@@ -299,6 +299,7 @@ void angleSet(double a){
 		bndAngl = preAngl + bounc;
 		newAngl = bndAngl;
 		setParam();
+		delay (150);
 	}
 	newAngl = preAngl;
 	setParam();
