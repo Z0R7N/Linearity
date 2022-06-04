@@ -5,6 +5,9 @@
 		<labelControl id="info0" label="Поправки"/>
 		<labelControl id="info4" label="на углы"/>
 		<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large" />
+		<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" onAction="cbSetZero"/>
+		<labelControl id="info7" label=" Ноль"/>
+		<labelControl id="info8" label="найден"/>
 	</group>
 	<group id="checkAngle" label="Один угол">
 		<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
@@ -12,9 +15,11 @@
 	</group>
 	<group id="manual" label="Ручное управление">
 		<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large" />
-		<labelControl id="info1" label="Увеличить шаг  -  стрелка вверх" />
-		<labelControl id="info2" label="Уменьшить шаг  -  стрелка вниз" />
-		<labelControl id="info3" label="Поворот  - стрелки влево-вправо" />
+		<labelControl id="info1" label="Изменить шаг 0.1 - вверх / вниз" />
+		<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз" />
+		<labelControl id="info3" label="Поворот   -   влево-вправо" />
+		<labelControl id="info5" label="Остановить управление - пробел" />
+		<labelControl id="info15" label="       Задать ноль - End" />
 		<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
 	</group>
 	<group id="info" label="Информация">

@@ -35,16 +35,16 @@ f - отключить программное ограничение повор�
 #define setBnc true					// if bounce of rotate is need
 
 int maxPs = 1000;
-int minPs = 80;
+int minPs = 20;
 
 bool blck = true;					// block for danger rotate (<40 and >320 degrees)
 bool goMove = true;					// if block for move (<40 and >320 degrees)
 String ser = "";					// string from serial
-double mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
-double newAngl = 0;					// angle for motor move
-double absAngle = -1;				// angle for check zero point equals 180 degrees
-int ps = 120;						// delay for pause (80 minimum & 1000 maximum)
-double encdr = -1;					// counting encoder
+long mainAngle = -1;				// countong for angle of position steper motor (from 0 to 51200)
+long newAngl = 0;					// angle for motor move
+long absAngle = -1;					// angle for check zero point equals 180 degrees
+int ps = 40;						// delay for pause (20 minimum & 1000 maximum)
+long encdr = -1;					// counting encoder
 bool cw = true;						// clockwise or counterclockwise rotating
 bool rotate = false;				// bool value for checking rotation
 bool zeroPoint = false;				// bool value for set sensor point
@@ -96,8 +96,8 @@ void stepSM(){
 		delayMicroseconds(ps);
 		digitalWrite(PUL, LOW);
 		delayMicroseconds(ps);
-		if (absAngle < 0) absAngle += 51200.01;
-		if (absAngle > 51200) absAngle -= 51200.1;
+		if (absAngle == -1) absAngle = 51199;
+		if (absAngle == 51200) absAngle = 0;
 	}
 }
 
@@ -176,8 +176,8 @@ void getCommand(String com){
 		Serial.flush();
 	}
 	else if (com == "^") {
-		mainAngle = 17066.33333333;
-		encdr = 341.33333333;
+		mainAngle = 17066;
+		encdr = 341;
 		Serial.println(rounding(mainAngle / angleStep));
 		// Serial.println(round());
 		Serial.flush();
@@ -227,17 +227,27 @@ void getCommand(String com){
 
 // rounding for numbers
 double rounding(double x){
-	x *= 100;
+	x *= 10000;
 	double y = round(x);
-	x = y / 100;
+	x = y / 10000;
 	return x;
+}
+
+// check for rotation by not motor
+void failRotation(){
+	if (absAngle == 25600 && digitalRead(zero)){
+		zeroPoint = false;
+		absAngle = -1;
+		mainAngle = -1;
+		encdr = -1;
+	}
 }
 
 // search point zero
 void searchZero(){
 	int tmpPs = ps;
 	if (absAngle < 0) {
-		ps = 80;
+		ps = 5;
 	}
 	if (digitalRead(zero)) {
 		if (zeroPoint) {
@@ -252,19 +262,26 @@ void searchZero(){
 			} else {
 				cnt = 0;
 			}
-			stepSM();
+			if(digitalRead(stp)) {
+				stepSM();
+			}
+			else {
+				absAngle = -1;
+				Serial.println("-1");
+				return;
+			}
 		}
 		blck = tmpBlck;
 	}
 	setValueZero();
-	// ps = tmpPs;
+	ps = tmpPs;
 	Serial.println(rounding(mainAngle / angleStep));
 	Serial.flush();
 }
 
 // rotate to 180 abs
 void calculateDir(){
-	double d = absAngle - 25599.5;
+	double d = absAngle - 25600;
 	if (d == 0) return;
 	if (d > 0) {
 		digitalWrite(DIR, HIGH);
@@ -277,19 +294,32 @@ void calculateDir(){
 // set zero point for value
 void setValueZero(){
 	if (!zeroPoint) {
-		mainAngle = 17066.33333333;
-		encdr = 341.33333333;
+		absAngle = 25600;
+		mainAngle = 17066;
+		encdr = 341;
+		zeroPoint = true;
 	}
-	zeroPoint = true;
-	// absAngle = 25599.5;
-	absAngle = 25600;
+	else {
+		if(mainAngle > 37000 || mainAngle < 0) {
+			mainAngle = 17066;
+			encdr = 341;
+		}
+		if (absAngle > 25900 || absAngle < 25300) {
+			absAngle = 25600;
+		}
+	}
 }
+
 
 // setting angle
 void angleSet(double a){
-	double preAngl;						// angle there motor must move before new angle
+	long preAngl;						// angle there motor must move before new angle
 	double tmp = a * angleStep;
-	preAngl = rounding(tmp);
+	// Serial.println("========");
+	// Serial.println(tmp);
+	preAngl = round(tmp);
+	// Serial.println(preAngl);
+	// Serial.println("--------");
 	if (preAngl < mainAngle) {
 		newAngl = preAngl - coefAngl;
 		setParam();
@@ -299,7 +329,7 @@ void angleSet(double a){
 		bndAngl = preAngl + bounc;
 		newAngl = bndAngl;
 		setParam();
-		delay (150);
+		delay (200);
 	}
 	newAngl = preAngl;
 	setParam();
@@ -385,6 +415,9 @@ void move() {
 		if(digitalRead(stp)) {
 			stepSM();
 		}
+		else {
+			break;
+		}
 	}
 	rotate = false;
 }
@@ -393,10 +426,10 @@ void move() {
 bool blockMove(){
 	bool blocker = false;
 	if (blck) {
-		if (absAngle < 5688.89) { //absAngle == 5689 || 
+		if (absAngle == 5689 || absAngle < 5689) {
 			blocker = true;
 		}
-		if (absAngle > 45511.11) { //absAngle == 45511 || 
+		if (absAngle == 45511 || absAngle > 45511) {
 			blocker = true;
 		}
 	}
@@ -439,6 +472,7 @@ void loop() {
 	else {
 		if (ser != ""){
 			ser.trim();
+			failRotation();
 			getCommand(ser);
 			ser = "";
 		}
