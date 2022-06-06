@@ -1,32 +1,40 @@
-<tab id="linearity" label="Линейность">
-	<group id="linear" label="Проверка линейности">
-		<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" />
-		<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
-		<labelControl id="info0" label="Поправки"/>
-		<labelControl id="info4" label="на углы"/>
-		<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large" />
-		<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" onAction="cbSetZero"/>
-		<labelControl id="info7" label=" Ноль"/>
-		<labelControl id="info8" label="найден"/>
-	</group>
-	<group id="checkAngle" label="Один угол">
-		<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" />
-		<button id="goAngle" label="Перейти к углу" imageMso="BackAttach" onAction="rot1Angle" size="large" />
-	</group>
-	<group id="manual" label="Ручное управление">
-		<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large" />
-		<labelControl id="info1" label="Изменить шаг 0.1 - вверх / вниз" />
-		<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз" />
-		<labelControl id="info3" label="Поворот   -   влево-вправо" />
-		<labelControl id="info5" label="Остановить управление - пробел" />
-		<labelControl id="info15" label="       Задать ноль - End" />
-		<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" />
-	</group>
-	<group id="info" label="Информация">
-		<labelControl id="lblStep" label="Шаг" />
-		<labelControl id="lblcrntUP" label="Угол"/>
-	</group>
-	<group id="curAngl" label="Найти 120°">
-		<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large" />
-	</group>
-</tab>
+<?xml version="1.0" standalone="yes"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="ribOnLoad">
+	<ribbon startFromScratch="false">
+		<tabs>
+			<tab id="linearity" label="Линейность">
+				<group id="linear" label="Проверка линейности">
+					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large"/>
+					<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
+					<labelControl id="info0" label="Поправки"/>
+					<labelControl id="info4" label="на углы"/>
+					<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large"/>
+					<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" onAction="cbSetZero"/>
+					<labelControl id="info7" label=" Ноль"/>
+					<labelControl id="info8" label="найден"/>
+				</group>
+				<group id="checkAngle" label="Один угол">
+					<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large"/>
+					<button id="goAngle" label="Перейти к углу" imageMso="BackAttach" onAction="rot1Angle" size="large"/>
+				</group>
+				<group id="manual" label="Ручное управление">
+					<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large"/>
+					<labelControl id="info1" label="Изменить шаг 0.1 - вверх / вниз"/>
+					<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз"/>
+					<labelControl id="info3" label="Поворот   -   влево-вправо"/>
+					<labelControl id="info5" label="Остановить управление - пробел"/>
+					<labelControl id="info15" label="       Задать ноль - End"/>
+					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large"/>
+					<button id="btnSet120" label="Установить 120" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large"/>
+				</group>
+				<group id="info" label="Информация">
+					<labelControl id="lblStep" label="Шаг"/>
+					<labelControl id="lblcrntUP" label="Угол"/>
+				</group>
+				<group id="curAngl" label="Найти 120°">
+					<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large"/>
+				</group>
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>
