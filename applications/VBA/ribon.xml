@@ -20,16 +20,22 @@
 				<group id="manual" label="Ручное управление">
 					<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large"/>
 					<labelControl id="info1" label="Изменить шаг 0.1 - вверх / вниз"/>
-					<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз"/>
+					<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз  "/>
 					<labelControl id="info3" label="Поворот   -   влево-вправо"/>
+					<separator id="mySeparator1" />
 					<labelControl id="info5" label="Остановить управление - пробел"/>
-					<labelControl id="info15" label="       Задать ноль - End"/>
+					<labelControl id="info15" label="Задать ноль - End"/>
+					<labelControl id="lblStep" getLabel="getLblStepManual"/>
 					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large"/>
 					<button id="btnSet120" label="Установить 120" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large"/>
 				</group>
 				<group id="info" label="Информация">
-					<labelControl id="lblStep" label="Шаг"/>
-					<labelControl id="lblcrntUP" label="Угол"/>
+					<labelControl id="lblcrntUP" getLabel="getLblmainAngle"/>
+					<labelControl id="portVolt" getLabel="getLblPortVolt"/>
+					<labelControl id="portDriver" getLabel="getLblPortDriver"/>
+					<separator id="mySeparator2" />
+					<labelControl id="savedVolt" getLabel="getLblSavedVolt"/>
+					<labelControl id="savedDriver" getLabel="getLblSavedDriver"/>
 				</group>
 				<group id="curAngl" label="Найти 120°">
 					<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large"/>
