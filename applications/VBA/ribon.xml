@@ -4,30 +4,25 @@
 		<tabs>
 			<tab id="linearity" label="Линейность">
 				<group id="linear" label="Проверка линейности">
-					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large"/>
-					<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction"/>
+					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" supertip="Запуск автоматичекской проверки линейности прибора."/>
+					<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction" supertip="Поставьте галку если надо автоматическая корректировка углов."/>
 					<labelControl id="info0" label="Поправки"/>
 					<labelControl id="info4" label="на углы"/>
-					<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large"/>
-					<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" onAction="cbSetZero"/>
+					<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large" supertip="Выберите в таблице ячейку с углом, который надо изменить и после нажатия этой кнопки в окне введите нужный новый угол."/>
+					<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" getEnabled="cbZeroEna" onAction="cbSetZero" supertip="Установите галку если ноль найден или снимите галку если ноль надо искать автоматически."/>
 					<labelControl id="info7" label=" Ноль"/>
 					<labelControl id="info8" label="найден"/>
 				</group>
 				<group id="checkAngle" label="Один угол">
-					<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large"/>
-					<button id="goAngle" label="Перейти к углу" imageMso="BackAttach" onAction="rot1Angle" size="large"/>
+					<button id="oneAngle" label="Проверить угол" imageMso="ChartTypePieInsertGallery" onAction="angleCheck" size="large" supertip="Выберите ячейку в таблице с углом, который надо перепроверить и нажмите эту кнопку."/>
+					<button id="goAngle" label="Перейти к углу" imageMso="BackAttach" onAction="rot1Angle" size="large" supertip="Выберите ячейку в таблице с углом на который надо повернть прибор."/>
 				</group>
 				<group id="manual" label="Ручное управление">
-					<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" size="large"/>
-					<labelControl id="info1" label="Изменить шаг 0.1 - вверх / вниз"/>
-					<labelControl id="info11" label="Изменить шаг 1 - shift вверх / вниз  "/>
-					<labelControl id="info3" label="Поворот   -   влево-вправо"/>
-					<separator id="mySeparator1" />
-					<labelControl id="info5" label="Остановить управление - пробел"/>
-					<labelControl id="info15" label="Задать ноль - End"/>
+					<button id="btnManualOn" label="Включить ручное управление" imageMso="Breakpoint" onAction="manualOn" supertip="Шаг 0.1 - вверх / вниз             Шаг 1 - шифт + вверх / вниз        Поворот - влево / вправо Остановить ручное - пробел Задать ноль - End" size="large"/>
+					<labelControl id="lblStep0" label="Ручной шаг  "/>
 					<labelControl id="lblStep" getLabel="getLblStepManual"/>
-					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large"/>
-					<button id="btnSet120" label="Установить 120" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large"/>
+					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" supertip="Нажмите для установки нулевой точки."/>
+					<button id="btnSet120" label="Установить 120" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large" supertip="Нажмите для установки угла в 120 градусов."/>
 				</group>
 				<group id="info" label="Информация">
 					<labelControl id="lblcrntUP" getLabel="getLblmainAngle"/>
@@ -38,7 +33,7 @@
 					<labelControl id="savedDriver" getLabel="getLblSavedDriver"/>
 				</group>
 				<group id="curAngl" label="Найти 120°">
-					<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large"/>
+					<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large" supertip="Эту операцию надо производить до начала работ."/>
 				</group>
 			</tab>
 		</tabs>
