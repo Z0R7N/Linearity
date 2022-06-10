@@ -5,10 +5,15 @@
 			<tab id="linearity" label="Линейность">
 				<group id="linear" label="Проверка линейности">
 					<button id="btnLinear" label="Линейность" imageMso="_3DTiltRightClassic" onAction="startLine" size="large" supertip="Запуск автоматичекской проверки линейности прибора."/>
-					<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" onAction="cbxCorrectAngleAction" supertip="Поставьте галку если надо автоматическая корректировка углов."/>
+					<checkBox id="cbManual0Angle" label=" " getPressed="cbManualAnglPressed" getEnabled="cbManualAnglsEna" onAction="cbManualAngleAction" supertip="Поставьте галку если будете искать нулевую точку вручную."/>
+					<labelControl id ="info11" label="  Ноль"/>
+					<labelControl id ="info12" label="вручную"/>
+					<separator id="mySeparator3" />
+					<checkBox id="bxCorrectAngle" label=" " getPressed="cbxCorAnglPressed" getEnabled="cbCorAnglsEna" onAction="cbxCorrectAngleAction" supertip="Поставьте галку если надо автоматическая корректировка углов."/>
 					<labelControl id="info0" label="Поправки"/>
 					<labelControl id="info4" label="на углы"/>
 					<button id="btnCorrectAngle" label="Изменить угол" imageMso="DataGraphicIconSet" onAction="correctAngle" size="large" supertip="Выберите в таблице ячейку с углом, который надо изменить и после нажатия этой кнопки в окне введите нужный новый угол."/>
+					<separator id="mySeparator4" />
 					<checkBox id="cbZeroTrue" label=" " getPressed="cbxGetZerolPressed" getEnabled="cbZeroEna" onAction="cbSetZero" supertip="Установите галку если ноль найден или снимите галку если ноль надо искать автоматически."/>
 					<labelControl id="info7" label=" Ноль"/>
 					<labelControl id="info8" label="найден"/>
@@ -22,7 +27,7 @@
 					<labelControl id="lblStep0" label="Ручной шаг  "/>
 					<labelControl id="lblStep" getLabel="getLblStepManual"/>
 					<button id="btnZero" label="Установить" imageMso="_0" onAction="btnSetZero" size="large" supertip="Нажмите для установки нулевой точки."/>
-					<button id="btnSet120" label="Установить 120" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large" supertip="Нажмите для установки угла в 120 градусов."/>
+					<button id="btnSet120" label="Установить 120°" imageMso="AutoFilterClassic" onAction="btnSetAngle120" size="large" supertip="Нажмите для установки угла в 120 градусов."/>
 				</group>
 				<group id="info" label="Информация">
 					<labelControl id="lblcrntUP" getLabel="getLblmainAngle"/>
@@ -34,6 +39,8 @@
 				</group>
 				<group id="curAngl" label="Найти 120°">
 					<button id="btn120" label="120°" imageMso="Chart3DConeChart" onAction="btnFind120" size="large" supertip="Эту операцию надо производить до начала работ."/>
+					<separator id="mySeparator6" />
+					<button id="scanPorts" label="Scan" imageMso="CDAudioPlayTrackAutomatically" onAction="btnScanPortsAction" size="large" supertip="Нажмите если не найдены порты мультиметра и драйвера вращения двигателя."/>
 				</group>
 			</tab>
 		</tabs>
