@@ -31,8 +31,8 @@ f - отключить программное ограничение повор�
 #define angleStep 142.2222222222
 #define enCoeff 2.844444444444
 #define coefAngl 1422
-#define bounc 2						// value for bounce of rotate
-#define setBnc true					// if bounce of rotate is need
+#define bounc 2						    // value for bounce of rotate
+#define setBnc false					// if bounce of rotate is need
 
 int maxPs = 1000;
 int minPs = 20;
