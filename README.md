@@ -7,5 +7,5 @@
 The add-on via the COM port, using the API written by me, sends commands to the arduino to turn the device,
 reads data on the COM port from the multimeter and saves it to a table.
 
-Надстройка по COM-порту, с помощью API написанным мной, посылает команды в ардуино для поворота прибора, 
-считывает данные по COM-порту с мультиметра и сохраняет в таблицу.
+Надстройка для excel по COM-порту посылает команды в ардуино, с помощью API написанным мной, для поворота прибора, 
+считывает данные по другому COM-порту с мультиметра и сохраняет в таблицу.
