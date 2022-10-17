@@ -122,7 +122,7 @@ void getCommand(String com){
 	double num = -1;
 	if (com.length() > 0) {
 		com = comma2dot(com);
-		num = com.toDouble();
+		num = strtod(com);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
@@ -368,7 +368,7 @@ void instruction(){
 // calculating speed
 int speedMotor(String s){
 	int res = -1;
-	double speed = s.toDouble();
+	double speed = strtod(s);
 	if (speed > 9 || speed < 1 || s.length() == 0) {
 		instruction();
 	}
