@@ -1,0 +1,5 @@
+4 1 # Active Entities (DO NOT EDIT!)
+43a830006343b5be0005b12a00000000 pmlEntToolpath 'стенка перед доработка д2,5'
+4384b6306343b417000376b700000000 pmlEntBoundary '1'
+43a732c06343b3c70002f69000000000 pmlEntTool 'EM2.5x2'
+43bca7606343b3960002354b00000000 pmlEntWorkplane '1'

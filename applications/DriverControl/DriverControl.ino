@@ -436,6 +436,13 @@ bool blockMove(){
 	return blocker;
 }
 
+// converter string to double
+double sToDbl(String s){
+	double res = 0;
+	
+	return res;
+}
+
 void setup() {
   pinMode(PUL, OUTPUT);
   pinMode(DIR, OUTPUT);

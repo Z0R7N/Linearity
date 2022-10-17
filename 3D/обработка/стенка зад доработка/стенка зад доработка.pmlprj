@@ -1,0 +1,13 @@
+10 4 2021000 2021009 64 # Entity Index (DO NOT EDIT!)
+0 2
+11 окт 2022 12.36.03
+x495bf5806343b6de0012223d00000000.pmlent pmlEntLevel 'Config-0-Partition'
+x41ae29406343b6fe0013c87e00000000.pmlent pmlEntWorkplane '1'
+x223fc3c06343b71a00145e6200000000.pmlent pmlEntBoundary '1'
+x40d21c006343b7320015c9e300000000.pmlent pmlEntTool 'EM2.5x2'
+x40d173a06343b73f0015d80200000000.pmlent pmlEntToolpath 'стенка зад доработка д2,5'
+x224ae6206343b7ed001c8a2700000000.pmlent pmlEntNCProgram 'стенка зад доработка д2,5'
+x48e551d06343b6cb0011ffa900000000.pmlent pmlEntModel 'стенка зад'
+x43f6ed80634537330011769e00000000.pmlent pmlEntLevel 'New components from reimported model стенка зад'
+x217ee520634537970018cbe300000000.pmlent pmlEntToolpath 'стенка зад доработка д2,5_1'
+x424333d0634537a5001cf88700000000.pmlent pmlEntBoundary '2'

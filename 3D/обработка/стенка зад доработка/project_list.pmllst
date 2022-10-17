@@ -1,0 +1,44 @@
+type list
+version 0
+Toolpath\
+Toolpath\стенка зад доработка д2,5
+Toolpath\стенка зад доработка д2,5_1
+Group\
+Pattern\
+Workplane\
+Workplane\1
+Setup\
+FeatureGroup\
+Boundary\
+Boundary\1
+Boundary\2
+Macro\
+Featureset\
+NCProgram\
+NCProgram\стенка зад доработка д2,5
+Level\
+Level\Config-0-Partition
+Level\New components from reimported model стенка зад
+Tool\
+Tool\EM2.5x2
+Process\
+MachineTool\
+StockModel\
+Model\
+Model\стенка зад
+Toolpath\
+Group\
+Pattern\
+Workplane\
+Setup\
+FeatureGroup\
+Boundary\
+Macro\
+Featureset\
+NCProgram\
+Level\
+Tool\
+Process\
+MachineTool\
+StockModel\
+Model\
