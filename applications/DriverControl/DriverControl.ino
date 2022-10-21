@@ -122,7 +122,7 @@ void getCommand(String com){
 	double num = -1;
 	if (com.length() > 0) {
 		com = comma2dot(com);
-		num = strtod(com);
+		num = strToDbl(com);
 	}
 	if (com.length() > 2) st = com.substring(0, 2);
 	if (com == "*") {
@@ -368,7 +368,7 @@ void instruction(){
 // calculating speed
 int speedMotor(String s){
 	int res = -1;
-	double speed = strtod(s);
+	double speed = strToDbl(s);
 	if (speed > 9 || speed < 1 || s.length() == 0) {
 		instruction();
 	}
@@ -437,9 +437,26 @@ bool blockMove(){
 }
 
 // converter string to double
-double sToDbl(String s){
+double strToDbl(String s){
+	double nu = 0;
+	int div = 10;
+	bool dot = true;
 	double res = 0;
-	
+	for (int i = 0; i < s.length() - 1; i++) {
+		char x = s[i];
+		if (x == '.' || x == ','){
+			dot = false;
+			continue;
+		}
+		nu = x - '0';
+		if (dot) {
+			res *= 10;
+		} else {
+			nu /= div; 
+			div *= 10;
+		}
+		res += nu;
+	}
 	return res;
 }
 
