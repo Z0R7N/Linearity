@@ -235,7 +235,7 @@ double rounding(double x){
 
 // check for rotation by not motor
 void failRotation(){
-	if (absAngle == 25600 && digitalRead(zero)){
+	if (absAngle == 25600 && !digitalRead(zero)){
 		zeroPoint = false;
 		absAngle = -1;
 		mainAngle = -1;
@@ -249,7 +249,7 @@ void searchZero(){
 	if (absAngle < 0) {
 		ps = 5;
 	}
-	if (digitalRead(zero)) {
+	if (!digitalRead(zero)) {
 		if (zeroPoint) {
 			calculateDir();
 		}
@@ -257,7 +257,7 @@ void searchZero(){
 		bool tmpBlck = blck;
 		blck = false;
 		while (cnt < 700) {
-			if (!digitalRead(zero)) {
+			if (digitalRead(zero)) {
 				cnt++;
 			} else {
 				cnt = 0;
@@ -461,23 +461,40 @@ double strToDbl(String s){
 }
 
 void setup() {
-  pinMode(PUL, OUTPUT);
-  pinMode(DIR, OUTPUT);
-  pinMode(ENA, OUTPUT);
-  pinMode(en2, INPUT);
-  pinMode(en3, INPUT);
-  pinMode(stp, INPUT);
-  pinMode(zero, INPUT);
-  //digitalWrite(ENA, HIGH);
-  digitalWrite(ENA, LOW);
-  // digitalWrite(DIR, HIGH);
-  digitalWrite(DIR, LOW);
-  Serial.begin(115200);
-  if (!digitalRead(zero)) {
-	  setValueZero();
-  }
-  attachInterrupt (0, inter, CHANGE);
-  attachInterrupt (1, inter, CHANGE);
+	pinMode(PC13, OUTPUT);
+	digitalWrite(PC13, 0);
+	delay(3000);
+	digitalWrite(PC13, 1);
+	delay(300);
+	digitalWrite(PC13, 0);
+	delay(2000);
+	digitalWrite(PC13, 1);
+	delay(200);
+	digitalWrite(PC13, 0);
+	delay(1000);
+	digitalWrite(PC13, 1);
+	delay(100);
+	digitalWrite(PC13, 0);
+	delay(100);
+	digitalWrite(PC13, 1);
+	delay(100);
+	Serial.begin(115200);
+	pinMode(PUL, OUTPUT);
+	pinMode(DIR, OUTPUT);
+	pinMode(ENA, OUTPUT);
+	pinMode(en2, INPUT);
+	pinMode(en3, INPUT);
+	pinMode(stp, INPUT);
+	pinMode(zero, INPUT);
+	//digitalWrite(ENA, HIGH);
+	digitalWrite(ENA, LOW);
+	// digitalWrite(DIR, HIGH);
+	digitalWrite(DIR, LOW);
+	if (digitalRead(zero)) {
+		setValueZero();
+	}
+	attachInterrupt (0, inter, CHANGE);
+	attachInterrupt (1, inter, CHANGE);
 }
 
 // the loop function runs over and over again forever
@@ -488,9 +505,12 @@ void loop() {
 		while (int(sr) != -1){// && int(sr) != -1 && int(sr) != 13){
 			if (int(sr) != 10 && int(sr) != 13){
 				ser += sr;
+				Serial.print("read serial: ");
+				Serial.println(ser);
 			}
 			delay(5);
 			sr = Serial.read();
+		// Serial.println("start loop");
 		}
 	}
 	else {
