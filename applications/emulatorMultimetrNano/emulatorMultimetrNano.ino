@@ -6,8 +6,8 @@ String ser;
 void(* resetFunc) (void) = 0;
 
 void setup() {
-	pinMode(LED, OUTPUT);
-  Serial.begin(9600);
+	// pinMode(LED, OUTPUT);
+  Serial.begin(115200);
 }
 
 void loop() {
