@@ -104,6 +104,10 @@ void getCommand(String com){
 		Serial.println("0");
 		Serial.flush();
 	}
+	else if (com == "<>") {
+		Serial.println(true);
+		Serial.flush();
+	}
 	else if (com == "+") {
 		digitalWrite(DIR, HIGH);
 		cw = true;
@@ -156,7 +160,7 @@ void getCommand(String com){
 	}
 	else {
 		// instruction();
-		Serial.println("error");
+		Serial.println("hlo");
 		Serial.flush();
 	}
 }
@@ -284,7 +288,7 @@ void setup() {
   digitalWrite(ENA, LOW);
   // digitalWrite(DIR, HIGH);
   digitalWrite(DIR, LOW);
-  Serial.begin(9600);
+  Serial.begin(115200);
   //Serial.println("hlo");
   attachInterrupt (0, inter, CHANGE);
   attachInterrupt (1, inter, CHANGE);
